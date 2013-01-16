@@ -1,0 +1,37 @@
+<style type="text/css">	<!--
+	body,th,td,input,select,textarea,select,checkbox{
+	 font:10pt "新細明體";
+	 line-height:1.5}
+  	
+	a:link {
+		font: 10pt "新細明";
+		text-decoration: none;
+		color: #00008b;
+	}
+	a:visited      {
+		font: 10pt "新細明";
+		text-decoration: none;
+		color: #00008b;
+	}
+	a:active       {
+		font: 10pt "新細明";
+		text-decoration: none;
+		color: #00008b;
+	}
+	a:hover  {font: 10pt "新細明"; text-decoration: underline; color: #a52a2a}
+	
+	.Bt{
+		font-family: '新細明體';
+		font-size: 9 pt;
+		border: 1px groove Blue;
+		background-color: #DCDCDC;
+	}
+	
+	.St{
+	font-family:'新細明體';
+	font-size: 9 pt;
+	border : solid #dadada 1;
+	background-color : #ffccff;
+    }
+	-->
+</style>

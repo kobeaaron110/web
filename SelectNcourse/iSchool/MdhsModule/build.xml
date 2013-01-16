@@ -1,0 +1,8 @@
+﻿<BuildManifest Version="1.0">
+  <Files>
+    <File Name="HealthyCenter.dll" Folder="" Size="26112" Hash="YJfEA0oURIWy+1OID0eh7rWFT/w=">
+      <AssemblyName>HealthyCenter, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</AssemblyName>
+      <Version>1.0.0.0</Version>
+    </File>
+  </Files>
+</BuildManifest>

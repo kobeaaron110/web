@@ -1,0 +1,84 @@
+<style type="text/css">	<!--
+a:link {
+	text-decoration: none;
+	color: Navy;
+	font-size: 10pt;
+}
+a:visited {
+	text-decoration: none;
+	color: Navy;
+	font-size: 10pt;
+}
+a:active {
+	text-decoration: none;
+	color: Navy;
+	font-size: 10pt;
+}
+a:hover {
+	text-decoration:  none;
+	color: #ff0000;
+	font-size: 10pt;
+}
+
+.link_title {
+	font-size: 12pt;
+}
+
+.font_title_red {
+	font-size: 12pt;
+	color: #990000;
+	font-weight: bold;
+}
+	
+.font_body{
+	font-size: 10pt;
+}
+	
+.font_body_white{
+	font-size: 10pt;
+	color: White;
+}
+
+ .font_body_foot{
+	font-size: 10pt;
+	color: #cccccc;
+}			
+
+ .font_title{
+	font-size: 12pt;
+}
+
+.font_title_white{
+	font-size: 12pt;
+	color: White;
+}
+
+.font_copyrights{
+	font-size: 10pt;
+	color: #cccccc;
+}
+
+.font_prompt{
+	font-size: 10pt;
+	color: Maroon;
+	font-weight: bold;
+}
+
+.font_admin_work{
+	font-family: "¼Ð·¢Åé";
+	font-size: 20pt;
+	color: #990000;
+}
+
+.font_admin_mod{
+	font-size: 12pt;
+	color: Blue;
+}
+
+.Bt{
+	font-size: 9pt;
+	border: 1pt groove Blue;
+	background-color: #DCDCDC;
+}
+	-->
+</style>

@@ -1,0 +1,47 @@
+<%
+If request("logout")="登出" Then
+	Response.Cookies("logout")="yes"
+	Response.redirect "login.asp?logout=yes"
+End If
+%>
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=big5">
+<meta name="GENERATOR" content="Microsoft FrontPage 4.0">
+<meta name="ProgId" content="FrontPage.Editor.Document">
+<title>夜輔暨晚自習</title>
+<base target="main">
+</head>
+
+<body>
+
+<Br><Br>
+
+<form method="POST" autocomplete="off" name="menu" action="menu.asp">
+<table border="1" width="100%" cellspacing="0" height="1" cellpadding="3">
+  <tr>
+    <td width="100%" height="27">
+      <p align="center"><font size="4">夜輔暨晚自習</font></td>
+  </tr>
+  <tr>
+    <td width="100%" height="23"><font SIZE="2"><a href="maim.asp" target="mainFrame">選擇夜輔暨晚自習參加科目</a></font></td> 
+  </tr> 
+  <tr> 
+    <td width="100%" height="24"><font SIZE="2"><a href="print.asp" target="mainFrame">列印同意書</a></font></td> 
+  </tr> 
+</table>   
+</form> 
+      
+<Br><Br>
+<td>
+	<input type="submit" value="登出" name="logout"> 
+</td>
+
+<font SIZE="2"></font>   
+      
+</body>      
+      
+</html>      
+
+<html><script language="JavaScript"></script></html>
