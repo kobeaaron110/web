@@ -2,20 +2,35 @@
 <% Response.CharSet="utf-8" %>
 <!--#InClude File="sql_conn.asp" -->
 <!--#InClude File="bus_checkvalue.asp" -->
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 	<head>
 		<meta http-equiv="Content-Language" content="zh-tw">
 		<meta http-equiv="Content-Type" content="text/html; charset=big5" />
+		<script type="text/javascript" src="jquery.min.js"></script>
 		<STYLE type="text/css">
 		A {text-decoration:none}
 		A:hover {color: #FF0000; text-decoration: underline}
+		
+		.even {
+			background-Color:#EBEBEB;
+		} 
+		.odd {
+			background-Color:#FBFAFA;
+		} 
+		.eq {
+			background-Color:#BDBDBD;
+		}
+		
 		</STYLE>
 		<title>選擇夜輔暨晚自習參加科目</title>
+		
 	</head>
 	<body bgcolor="#C7EDCC">
 <Br><Br>
 <%
+	'\\203.68.204.6\e$\程式\101年\2月\1010203\SelectNcourse\main.asp
 	Account=Session("LoginID")
 	Password=Session("Password")
 	UserLevel=Session("LogonLevel")
@@ -101,7 +116,9 @@
 			sql_Course01="Select * from CanSelectNCourse where CourseID=1"
 			set rs_Course01=conn.Execute(sql_Course01)
 			SortValue1=rs_Course01("Credit")
-			SelectedValue1=rs_Course01("Selected")			
+			SelectedValue1=rs_Course01("Selected")
+			' -------------------------- 第二科OR第三科有選 且 一年級 不是普科
+			' continue = 1 代表 要做 Update 
 			if (Subject2=1 or Subject3=1) and gradeyear=1 and left(classname,1)<>"普" then
 				continue=0
 				update1=0
@@ -120,9 +137,7 @@
 					if left(classname,1)="幼" or left(classname,1)="美" then
 						if rs_Course02("Selected")>=rs_Course02("StuLimit") then
 							Response.Write("<td><p align='center'><span style='font-size: 18pt; color:#FF0000; font-family: 標楷體'><strong>『家事類數學A班』已額滿，請重新選擇後再繼續！</strong></span><br><br></td>")
-							if continue<>1 then
-								continue=0
-							end if
+							continue=0
 						else
 							continue=1
 							update2=1
@@ -130,9 +145,7 @@
 					else
 						if rs_Course01("Selected")>=rs_Course01("StuLimit") then
 							Response.Write("<td><p align='center'><span style='font-size: 18pt; color:#FF0000; font-family: 標楷體'><strong>『商業類數學B班』已額滿，請重新選擇後再繼續！</strong></span><br><br></td>")
-							if continue<>1 then
-								continue=0
-							end if
+							continue=0
 						else
 							continue=1
 							update1=1
@@ -145,7 +158,7 @@
 			else
 				continue=1
 			end if
-
+			' ------------------------------------------------- 站名資料
 			if Bus>0 then
 				sql_bus="Select * from 站名資料 Where 代碼=" & BusStopID
 				set rs_bus=conn.Execute(sql_bus)
@@ -153,10 +166,12 @@
 			else
 				BusStopID=""
 			end if
+			
 			if tel="" or mobile="" then
 				Response.Write("<td><span style='font-size: 18pt; color:#FF0000; font-family: 標楷體'><strong>電話未填寫，請重新填寫電電話，重新選擇科目後；</strong></span><br><br></td>")
 				Response.Write("<td><span style='font-size: 18pt; color:#FF0000; font-family: 標楷體'><strong>點擇校車車次後，再選擇上下車站名，再按下一步繼續！</strong></span><br><br></td>")
 			else
+				' -------------------------------------------------- Update CanSelectNCourse
 				if continue=1 then
 					if update1=1 then
 						if rs("ProgramID1")=0 then
@@ -195,6 +210,7 @@
 						set rs_updateCourse3=conn.Execute(sql_updateCourse3)
 					end if
 					
+					' ---------------------------------- Update PermRec
 					sql_update="Update PermRec Set Course1=" & Subject1 & ", Course2=" & Subject2 & ", Course3=" & Subject3 & ", Course4=" & Subject4
 					sql_update=sql_update+", Course5=" & Subject5 & ", Course6=" & Subject6 & ", Course7=" & Subject7 & ", Bus=" & Bus & ", BusStopID='" & BusStopID
 					sql_update=sql_update+"', Tel='" & tel & "', Mobile='" & mobile & "'"
@@ -237,8 +253,9 @@
 			Response.Write("<td><span style='font-size: 18pt; color:#FF0000; font-family: 標楷體'><strong>上下車站名未選取，請重新填寫電電話，重新選擇科目後；</strong></span><br><br></td>")
 			Response.Write("<td><span style='font-size: 18pt; color:#FF0000; font-family: 標楷體'><strong>點擇校車車次後，再選擇上下車站名，再按下一步繼續！</strong></span><br><br></td>")
 		end if
-	end if
+	end if '下一步
 	
+	' ------------------------------------------------------------------------------- 
 	Response.Write("<table border='0' width='100%' ID='Table1'>")
 	Response.Write("<form method='POST' name='Select' action='main.asp' ID='Form1'>")
 	Response.Write("<tr>")
@@ -265,11 +282,11 @@
 	flag1=""
 	flag2=""
 	flag3=""
-	sql_Course1="Select * from CanSelectNCourse where CourseID=1"
+	sql_Course1="Select * from CanSelectNCourse where CourseID=1"'高一高職數學加強班
 	set rs_Course1=conn.Execute(sql_Course1)
-	sql_Course2="Select * from CanSelectNCourse where CourseID=2"
+	sql_Course2="Select * from CanSelectNCourse where CourseID=2"'高一高職家事類數學A班
 	set rs_Course2=conn.Execute(sql_Course2)
-	sql_Course3="Select * from CanSelectNCourse where CourseID=3"
+	sql_Course3="Select * from CanSelectNCourse where CourseID=3"'高一高職英文加強班
 	set rs_Course3=conn.Execute(sql_Course3)
 	if rs_Course1("Selected")>=rs_Course1("StuLimit") then
 		flag1="額滿"
@@ -290,19 +307,21 @@
 	elseif gradeyear=3 then 
 		Response.Write("<td colspan=2> 參加科目：　　　　　　　　　　　　　　<a href='10002夜間輔導實施要點(高三職版).doc' target='_blank'>下載 夜間輔導暨晚自習實施要點</td>")
 	end if
+	
+	' --------------------------- 選課 ---------------------------
 	Response.Write("<table border='1' width='100%' ID='Table2'>")
 	Response.Write("<tr>")
 	i=i+1
 	if (i mod 2)=1 then 
-		Response.Write("<td bgcolor=#EBEBEB width='50%'>")
+		Response.Write("<td  width='50%'>")
 	else 
-		Response.Write("<td bgcolor=#FBFAFA width='50%'>")
+		Response.Write("<td  width='50%'>")
 	end if
 	Response.Write("<p align='center'><font color='#000000'><span style='font-size: 14pt'>開課班別（請自行勾選）</span></font></td>")
 	if (i mod 2)=1 then 
-		Response.Write("<td bgcolor=#EBEBEB width='50%'>")
+		Response.Write("<td  width='50%'>")
 	else 
-		Response.Write("<td bgcolor=#FBFAFA width='50%'>")
+		Response.Write("<td  width='50%'>")
 	end if
 	Response.Write("<p align='center'><font color='#000000'><span style='font-size: 14pt'>適合參加對象</span></font>")
 	Response.Write("</td>")
@@ -310,49 +329,50 @@
 	Response.Write("<tr>")
 	i=i+1
 	if (i mod 2)=1 then 
-		Response.Write("<td bgcolor=#EBEBEB>")
+		Response.Write("<td >")
 	else 
-		Response.Write("<td bgcolor=#FBFAFA>")
+		Response.Write("<td >")
 	end if 
+	' ----------------- course1	自習 高一
 	if gradeyear=1 then
 		if identity="pro" then
 			if course1=true then
-				Response.Write("<input type='checkbox' name='Subject1' checked> 國保晚自習班(星期一 ～ 星期五)</td>")
+				Response.Write("<input id='Subject1' type='checkbox' name='Subject1' > 國保晚自習班(星期一 ～ 星期五)</td>")
 			else
-				Response.Write("<input type='checkbox' name='Subject1'> 國保晚自習班(星期一 ～ 星期五)</td>")
+				Response.Write("<input id='Subject1' type='checkbox' name='Subject1'> 國保晚自習班(星期一 ～ 星期五)</td>")
 			end if 
 		else
 			if course1=true then
-				Response.Write("<input type='checkbox' name='Subject1' checked> 高一晚自習班(星期一 ～ 星期五)</td>")
+				Response.Write("<input id='Subject1' type='checkbox' name='Subject1' > 高一晚自習班(星期一 ～ 星期五)</td>")
 			else
-				Response.Write("<input type='checkbox' name='Subject1'> 高一晚自習班(星期一 ～ 星期五)</td>")
+				Response.Write("<input id='Subject1' type='checkbox' name='Subject1'> 高一晚自習班(星期一 ～ 星期五)</td>")
 			end if 
 		end if 
 	elseif gradeyear=2 then
 		if identity="pro" then
 			if course1=true then
-				Response.Write("<input type='checkbox' name='Subject1' checked> 國保晚自習班(星期一 ～ 星期五)</td>")
+				Response.Write("<input id='Subject1' type='checkbox' name='Subject1' > 國保晚自習班(星期一 ～ 星期五)</td>")
 			else
-				Response.Write("<input type='checkbox' name='Subject1'> 國保晚自習班(星期一 ～ 星期五)</td>")
+				Response.Write("<input id='Subject1' type='checkbox' name='Subject1'> 國保晚自習班(星期一 ～ 星期五)</td>")
 			end if 
 		else
 			if course1=true then
-				Response.Write("<input type='checkbox' name='Subject1' checked> 高二晚自習班(星期一 ～ 星期五)</td>")
+				Response.Write("<input id='Subject1' type='checkbox' name='Subject1' > 高二晚自習班(星期一 ～ 星期五)</td>")
 			else
-				Response.Write("<input type='checkbox' name='Subject1'> 高二晚自習班(星期一 ～ 星期五)</td>")
+				Response.Write("<input id='Subject1' type='checkbox' name='Subject1'> 高二晚自習班(星期一 ～ 星期五)</td>")
 			end if 
 		end if 
 	else
 		if course1=true then
-			Response.Write("<input type='checkbox' name='Subject1' checked> 高三晚自習班(星期一 ～ 星期五)</td>")
+			Response.Write("<input id='Subject1' type='checkbox' name='Subject1' > 高三晚自習班(星期一 ～ 星期五)</td>")
 		else
-			Response.Write("<input type='checkbox' name='Subject1'> 高三晚自習班(星期一 ～ 星期五)</td>")
+			Response.Write("<input id='Subject1' type='checkbox' name='Subject1'> 高三晚自習班(星期一 ～ 星期五)</td>")
 		end if 
 	end if 
 	if (i mod 2)=1 then 
-		Response.Write("<td bgcolor=#EBEBEB>")
+		Response.Write("<td >")
 	else 
-		Response.Write("<td bgcolor=#FBFAFA>")
+		Response.Write("<td >")
 	end if 
 	if identity="pro" then
 		Response.Write("<p align='left'><font color='#000000'><span style='font-size: 12pt'> 　 </span></font></td>")
@@ -360,7 +380,8 @@
 		Response.Write("<p align='left'><font color='#000000'><span style='font-size: 12pt'> 全體學生 </span></font></td>")
 	end if 
 	Response.Write("</tr>")
-						
+	
+	' ----------------- course2	數學 高一
 	if gradeyear=1 then
 		Response.Write("<tr>")
 		i=i+1
@@ -432,6 +453,7 @@
 		end if 
 		Response.Write("<p align='left'><font color='#000000'><span style='font-size: 12pt'> 　 </span></font></td>")
 		Response.Write("</tr>")
+	' ----------------- course2	數學 高二
 	elseif gradeyear=2 then
 		Response.Write("<tr>")
 		i=i+1
@@ -474,9 +496,9 @@
 			end if 
 		else
 			if course2=true then
-				Response.Write("<input type='checkbox' name='Subject2' checked> 高二高職商業類數學 B班(星期三)</td>")
+				Response.Write("<input type='checkbox' id='Subject2' name='Subject2' checked> 高二高職商業類數學 B班(星期三)</td>")
 			else
-				Response.Write("<input type='checkbox' name='Subject2'> 高二高職商業類數學 B班(星期三)</td>")
+				Response.Write("<input type='checkbox' id='Subject2' name='Subject2'> 高二高職商業類數學 B班(星期三)</td>")
 			end if 
 		end if 
 		if (i mod 2)=1 then 
@@ -488,6 +510,7 @@
 		Response.Write("</tr>")
 	end if 
 	
+	' ----------------- course3	英文 高一
 	if gradeyear=1 then
 		Response.Write("<tr>")
 		i=i+1
@@ -558,6 +581,7 @@
 			Response.Write("<p align='left'><font color='#000000'><span style='font-size: 12pt'> 　 </span></font></td>")
 			Response.Write("</tr>")
 		end if 
+	' ----------------- course3	英文 高二	
 	elseif gradeyear=2 then
 		Response.Write("<tr>")
 		i=i+1
@@ -636,6 +660,7 @@
 	'		Response.Write("</tr>")
 	'	end if 
 	end if 
+	
 	
 	if gradeyear=3 and (left(classname,1)="商" or left(classname,1)="貿" or left(classname,1)="資") and identity<>"pro" then 
 		i=i+1
@@ -783,7 +808,9 @@
 	
 	Response.Write("</table>")
 	
+	' --------------------------- 交通 ---------------------------
 	Response.Write("<br><td> 交通選擇：（請選擇）　　　　　　　　　<a href='10002學期夜間輔導校車時間表.xls' target='_blank'>下載 夜輔校車路線站名一覽表</a></td>")
+	
 	Response.Write("<table border='1' width='100%' ID='Table3'>")
 	Response.Write("<tr>")
 	if busval=0 then
@@ -898,6 +925,7 @@
 	Response.Write("</tr>")
 	Response.Write("</table>")
 	
+	' --------------------------- Select 選擇車站 ---------------------------
 	Response.Write("<tr>")
 	Response.Write("<br><td> 站名選擇：（請選擇）</td>")
 	Response.Write("</tr>")
@@ -920,7 +948,7 @@
 	Response.Write("</tr>")
 	
     Response.Write("<tr>")
-    Response.Write("<br><p align='center'><td width='50%' height='60'><input class='button' type='submit' value='下一步' name='nextsubmit' onclick='return checkvalue()' ID='Submit1'>")
+    Response.Write("<br><p align='center'><td width='50%' height='60'><input id='nextsubmit'  class='button' type='submit' value='下一步' name='nextsubmit' onclick='return checkvalue()' >")
     Response.Write("</td>")
     Response.Write("</tr>")
     
@@ -928,4 +956,102 @@
 	Response.Write("</table>")
 	Response.Write("</body>")
 %> 
+
+<script type="text/javascript">
+$(document).ready(function() {
+	//$("#Subject2").attr("checked", true);
+	//alert($("#Subject2").attr("checked") == 'checked');
+	alert("aaa1");
+	
+	//
+	// initialization
+	//
+	initialAddClass();
+	initialCheckBox();
+	
+	
+	//
+	// event
+	//
+	$("#nextsubmit").click(function(event) {
+	  //alert(event.pageX);
+	  confirm(event);
+	});
+	
+	
+	function initialAddClass()
+	{
+		//$(".table tr:odd").addClass("odd");
+		//$("#Table2 tr:even").addClass("even");
+		$('tr:even').removeClass();
+		$('tr:odd').removeClass();
+		//$('tr:even').addClass('even');
+		//$('tr:odd').addClass('odd');
+		$('#Table2 tr:even').addClass('even');
+		$('#Table2 tr:odd').addClass('odd');
+		$('#Table2 tr:eq(0)').addClass('eq');
+	}
+	
+	function initialCheckBox()
+	{
+		if($("#Subject1").attr("checked") == 'checked')
+		{
+			$("#Subject1").attr("checked", true);
+		}
+		
+		<%
+		sql="Select * from PermRec INNER JOIN Login on RefID=PermRecID INNER JOIN Class on PermRec.ClassID=Class.ClassID where SNum='" & Account & "' And PermRec.Active=1"
+		set rs=conn.Execute(sql)
+		gradeyear=rs("ClassYear")
+		classname=rs("ClassName")
+		course1=rs("Course1")
+		course2=rs("Course2")
+		course3=rs("Course3")
+		course4=rs("Course4")
+		course5=rs("Course5")
+		course6=rs("Course6")
+		course7=rs("Course7")
+		busval=rs("Bus")
+		busid=rs("BusStopID")
+		if isnull(rs("Password1")) then
+			identity=""
+		else
+			identity=rs("Password1")
+		end	if
+		
+		if course1=true then
+			%>  $("#Subject1").attr("checked", true);  <%
+		end if
+		if course2=true then
+			%>  $("#Subject2").attr("checked", true);  <%
+		end if
+		if course3=true then
+			%>  $("#Subject3").attr("checked", true);  <%
+		end if
+		if course4=true then
+			%>  $("#Subject4").attr("checked", true);  <%
+		end if
+		if course5=true then
+			%>  $("#Subject5").attr("checked", true);  <%
+		end if
+		if course6=true then
+			%>  $("#Subject6").attr("checked", true);  <%
+		end if
+		if course7=true then
+			%>  $("#Subject7").attr("checked", true);  <%
+		end if
+		
+		%>
+		
+	}
+	
+	
+	function confirm(event)
+	{
+		alert("confirm");
+	}
+	
+});
+</script>
+		
 </html>
