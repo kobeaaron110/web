@@ -535,115 +535,31 @@
 	Response.Write("<tr>")
 	'busval : BusCode
 	'Bus_Stop1() : Ŧ많='1'
-	if busval=0 then
-		Response.Write("<td bgcolor=#FBFAFA><input id='BusCode0' type='radio' value='0' name='Bus' checked  onclick='Bus_Stop0();'> ╀�黎뎔e</td>")
-	else
-		Response.Write("<td bgcolor=#FBFAFA><input id='BusCode0' type='radio' value='0' name='Bus'  onclick='Bus_Stop0();'> ╀�黎뎔e</td>")
-	end if
-	if busval=1 then
-		Response.Write("<td bgcolor=#FBFAFA><input id='BusCode1' type='radio' value='1' name='Bus' checked  onclick='Bus_Stop1();'> 1많Ŧ</td>")
-	else
-		Response.Write("<td bgcolor=#FBFAFA><input id='BusCode1' type='radio' value='1' name='Bus'  onclick='Bus_Stop1();'> 1많Ŧ</td>")
-	end if
-	if busval=2 then
-		Response.Write("<td bgcolor=#FBFAFA><input id='BusCode2' type='radio' value='2' name='Bus' checked  onclick='Bus_Stop6();'> 6많Ŧ</td>")
-	else
-		Response.Write("<td bgcolor=#FBFAFA><input id='BusCode2' type='radio' value='2' name='Bus'  onclick='Bus_Stop6();'> 6많Ŧ</td>")
-	end if
-	if busval=3 then
-		Response.Write("<td bgcolor=#FBFAFA><input id='BusCode3' type='radio' value='3' name='Bus' checked  onclick='Bus_Stop6B();'> 6B많Ŧ</td>")
-	else
-		Response.Write("<td bgcolor=#FBFAFA><input id='BusCode3' type='radio' value='3' name='Bus'  onclick='Bus_Stop6B();'> 6B많Ŧ</td>")
-	end if
-	if busval=4 then
-		Response.Write("<td bgcolor=#FBFAFA><input id='BusCode4' type='radio' value='4' name='Bus' checked  onclick='Bus_Stop6C();'> 6C많Ŧ</td>")
-	else
-		Response.Write("<td bgcolor=#FBFAFA><input id='BusCode4' type='radio' value='4' name='Bus'  onclick='Bus_Stop6C();'> 6C많Ŧ</td>")
-	end if
-	if busval=5 then
-		Response.Write("<td bgcolor=#FBFAFA><input id='BusCode5' type='radio' value='5' name='Bus' checked  onclick='Bus_Stop8();'> 8많Ŧ</td>")
-	else
-		Response.Write("<td bgcolor=#FBFAFA><input id='BusCode5' type='radio' value='5' name='Bus'  onclick='Bus_Stop8();'> 8많Ŧ</td>")
-	end if
-	if busval=6 then
-		Response.Write("<td bgcolor=#FBFAFA><input id='BusCode6' type='radio' value='6' name='Bus' checked  onclick='Bus_Stop9();'> 9많Ŧ</td>")
-	else
-		Response.Write("<td bgcolor=#FBFAFA><input id='BusCode6' type='radio' value='6' name='Bus'  onclick='Bus_Stop9();'> 9많Ŧ</td>")
-	end if
+	Response.Write("<td bgcolor=#FBFAFA><input id='BusCode0' type='radio' value='0' name='Bus'  onclick='Bus_Stop0();'> ╀�黎뎔e</td>")
+	Response.Write("<td bgcolor=#FBFAFA><input id='BusCode1' type='radio' value='1' name='Bus'  onclick='Bus_Stop1();'> 1많Ŧ</td>")
+	Response.Write("<td bgcolor=#FBFAFA><input id='BusCode2' type='radio' value='2' name='Bus'  onclick='Bus_Stop6();'> 6많Ŧ</td>")
+	Response.Write("<td bgcolor=#FBFAFA><input id='BusCode3' type='radio' value='3' name='Bus'  onclick='Bus_Stop6B();'> 6B많Ŧ</td>")
+	Response.Write("<td bgcolor=#FBFAFA><input id='BusCode4' type='radio' value='4' name='Bus'  onclick='Bus_Stop6C();'> 6C많Ŧ</td>")
+	Response.Write("<td bgcolor=#FBFAFA><input id='BusCode5' type='radio' value='5' name='Bus'  onclick='Bus_Stop8();'> 8많Ŧ</td>")
+	Response.Write("<td bgcolor=#FBFAFA><input id='BusCode6' type='radio' value='6' name='Bus'  onclick='Bus_Stop9();'> 9많Ŧ</td>")
 	Response.Write("</tr>")
 	Response.Write("<tr>")
-	if busval=7 then
-		Response.Write("<td bgcolor=#FBFAFA><input id='BusCode7' type='radio' value='7' name='Bus' checked  onclick='Bus_Stop11();'> 11많Ŧ</td>")
-	else
-		Response.Write("<td bgcolor=#FBFAFA><input id='BusCode7' type='radio' value='7' name='Bus'  onclick='Bus_Stop11();'> 11많Ŧ</td>")
-	end if
-	if busval=8 then
-		Response.Write("<td bgcolor=#FBFAFA><input id='BusCode8' type='radio' value='8' name='Bus' checked  onclick='Bus_Stop11B();'> 11B많Ŧ</td>")
-	else
-		Response.Write("<td bgcolor=#FBFAFA><input id='BusCode8' type='radio' value='8' name='Bus'  onclick='Bus_Stop11B();'> 11B많Ŧ</td>")
-	end if
-	if busval=9 then
-		Response.Write("<td bgcolor=#FBFAFA><input id='BusCode9' type='radio' value='9' name='Bus' checked  onclick='Bus_Stop15();'> 15많Ŧ</td>")
-	else
-		Response.Write("<td bgcolor=#FBFAFA><input id='BusCode9' type='radio' value='9' name='Bus'  onclick='Bus_Stop15();'> 15많Ŧ</td>")
-	end if
-	if busval=10 then
-		Response.Write("<td bgcolor=#FBFAFA><input id='BusCode10' type='radio' value='10' name='Bus' checked  onclick='Bus_Stop16();'> 16많Ŧ</td>")
-	else
-		Response.Write("<td bgcolor=#FBFAFA><input id='BusCode10' type='radio' value='10' name='Bus'  onclick='Bus_Stop16();'> 16많Ŧ</td>")
-	end if
-	if busval=11 then
-		Response.Write("<td bgcolor=#FBFAFA><input id='BusCode11' type='radio' value='11' name='Bus' checked  onclick='Bus_Stop20();'> 20많Ŧ</td>")
-	else
-		Response.Write("<td bgcolor=#FBFAFA><input id='BusCode11' type='radio' value='11' name='Bus'  onclick='Bus_Stop20();'> 20많Ŧ</td>")
-	end if
-	if busval=12 then
-		Response.Write("<td bgcolor=#FBFAFA><input id='BusCode12' type='radio' value='12' name='Bus' checked  onclick='Bus_Stop20B();'> 20B많Ŧ</td>")
-	else
-		Response.Write("<td bgcolor=#FBFAFA><input id='BusCode12' type='radio' value='12' name='Bus'  onclick='Bus_Stop20B();'> 20B많Ŧ</td>")
-	end if
-	if busval=13 then
-		Response.Write("<td bgcolor=#FBFAFA><input id='BusCode13' type='radio' value='13' name='Bus' checked  onclick='Bus_Stop30();'> 30많Ŧ</td>")
-	else
-		Response.Write("<td bgcolor=#FBFAFA><input id='BusCode13' type='radio' value='13' name='Bus'  onclick='Bus_Stop30();'> 30많Ŧ</td>")
-	end if
+	Response.Write("<td bgcolor=#FBFAFA><input id='BusCode7' type='radio' value='7' name='Bus'  onclick='Bus_Stop11();'> 11많Ŧ</td>")
+	Response.Write("<td bgcolor=#FBFAFA><input id='BusCode8' type='radio' value='8' name='Bus'  onclick='Bus_Stop11B();'> 11B많Ŧ</td>")
+	Response.Write("<td bgcolor=#FBFAFA><input id='BusCode9' type='radio' value='9' name='Bus'  onclick='Bus_Stop15();'> 15많Ŧ</td>")
+	Response.Write("<td bgcolor=#FBFAFA><input id='BusCode10' type='radio' value='10' name='Bus'  onclick='Bus_Stop16();'> 16많Ŧ</td>")
+	Response.Write("<td bgcolor=#FBFAFA><input id='BusCode11' type='radio' value='11' name='Bus'  onclick='Bus_Stop20();'> 20많Ŧ</td>")
+	Response.Write("<td bgcolor=#FBFAFA><input id='BusCode12' type='radio' value='12' name='Bus'  onclick='Bus_Stop20B();'> 20B많Ŧ</td>")
+	Response.Write("<td bgcolor=#FBFAFA><input id='BusCode13' type='radio' value='13' name='Bus'  onclick='Bus_Stop30();'> 30많Ŧ</td>")
 	Response.Write("</tr>")
 	Response.Write("<tr>")
-	if busval=14 then
-		Response.Write("<td bgcolor=#FBFAFA><input id='BusCode14' type='radio' value='14' name='Bus' checked  onclick='Bus_Stop33();'> 33많Ŧ</td>")
-	else
-		Response.Write("<td bgcolor=#FBFAFA><input id='BusCode14' type='radio' value='14' name='Bus'  onclick='Bus_Stop33();'> 33많Ŧ</td>")
-	end if
-	if busval=15 then
-		Response.Write("<td bgcolor=#FBFAFA><input id='BusCode15' type='radio' value='15' name='Bus' checked  onclick='Bus_Stop36();'> 36많Ŧ</td>")
-	else
-		Response.Write("<td bgcolor=#FBFAFA><input id='BusCode15' type='radio' value='15' name='Bus'  onclick='Bus_Stop36();'> 36많Ŧ</td>")
-	end if
-	if busval=16 then
-		Response.Write("<td bgcolor=#FBFAFA><input id='BusCode16' type='radio' value='16' name='Bus' checked  onclick='Bus_Stop39();'> 39많Ŧ</td>")
-	else
-		Response.Write("<td bgcolor=#FBFAFA><input id='BusCode16' type='radio' value='16' name='Bus'  onclick='Bus_Stop39();'> 39많Ŧ</td>")
-	end if
-	if busval=17 then
-		Response.Write("<td bgcolor=#FBFAFA><input id='BusCode17' type='radio' value='17' name='Bus' checked  onclick='Bus_Stop39B();'> 39B많Ŧ</td>")
-	else
-		Response.Write("<td bgcolor=#FBFAFA><input id='BusCode17' type='radio' value='17' name='Bus'  onclick='Bus_Stop39B();'> 39B많Ŧ</td>")
-	end if
-	if busval=18 then
-		Response.Write("<td bgcolor=#FBFAFA><input id='BusCode18' type='radio' value='18' name='Bus' checked  onclick='Bus_Stop39C();'> 39C많Ŧ</td>")
-	else
-		Response.Write("<td bgcolor=#FBFAFA><input id='BusCode18' type='radio' value='18' name='Bus'  onclick='Bus_Stop39C();'> 39C많Ŧ</td>")
-	end if
-	if busval=19 then
-		Response.Write("<td bgcolor=#FBFAFA><input id='BusCode19' type='radio' value='19' name='Bus' checked  onclick='Bus_Stop42();'> 42많Ŧ</td>")
-	else
-		Response.Write("<td bgcolor=#FBFAFA><input id='BusCode19' type='radio' value='19' name='Bus'  onclick='Bus_Stop42();'> 42많Ŧ</td>")
-	end if
-	if busval=20 then
-		Response.Write("<td bgcolor=#FBFAFA><input id='BusCode20' type='radio' value='20' name='Bus' checked  onclick='Bus_Stop60();'> 60많Ŧ</td>")
-	else
-		Response.Write("<td bgcolor=#FBFAFA><input id='BusCode20' type='radio' value='20' name='Bus'  onclick='Bus_Stop60();'> 60많Ŧ</td>")
-	end if
+	Response.Write("<td bgcolor=#FBFAFA><input id='BusCode14' type='radio' value='14' name='Bus'  onclick='Bus_Stop33();'> 33많Ŧ</td>")
+	Response.Write("<td bgcolor=#FBFAFA><input id='BusCode15' type='radio' value='15' name='Bus'  onclick='Bus_Stop36();'> 36많Ŧ</td>")
+	Response.Write("<td bgcolor=#FBFAFA><input id='BusCode16' type='radio' value='16' name='Bus'  onclick='Bus_Stop39();'> 39많Ŧ</td>")
+	Response.Write("<td bgcolor=#FBFAFA><input id='BusCode17' type='radio' value='17' name='Bus'  onclick='Bus_Stop39B();'> 39B많Ŧ</td>")
+	Response.Write("<td bgcolor=#FBFAFA><input id='BusCode18' type='radio' value='18' name='Bus'  onclick='Bus_Stop39C();'> 39C많Ŧ</td>")
+	Response.Write("<td bgcolor=#FBFAFA><input id='BusCode19' type='radio' value='19' name='Bus'  onclick='Bus_Stop42();'> 42많Ŧ</td>")
+	Response.Write("<td bgcolor=#FBFAFA><input id='BusCode20' type='radio' value='20' name='Bus'  onclick='Bus_Stop60();'> 60많Ŧ</td>")
 	Response.Write("</tr>")
 	Response.Write("</table>")
 	
