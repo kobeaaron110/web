@@ -230,7 +230,7 @@ if flag=1 then
 			else
 				Response.Write("<input id='Subject1' type='checkbox' name='Subject1' > 高二晚自習班(星期一 ～ 星期五)</td>")
 			end if 
-		else 'gradeyear=3 then 
+		else 'gradeyear=3 
 			Response.Write("<input id='Subject1' type='checkbox' name='Subject1' > 高三晚自習班(星期一 ～ 星期五)</td>")
 		end if 
 		
@@ -239,7 +239,7 @@ if flag=1 then
 		if identity="pro" then
 			Response.Write("<p align='left'><font color='#000000'><span style='font-size: 12pt'> 　 </span></font></td>")
 		else
-			Response.Write("<p align='left'><font color='#000000'><span style='font-size: 12pt'> 全體學生 </span></font></td>")
+			Response.Write("<p align='left'><font color='#000000'><span style='font-size: 14pt'> 全體學生 </span></font></td>")
 		end if 
 		Response.Write("</tr>")
 	end if 'course1
@@ -527,10 +527,17 @@ $(document).ready(function() {
 			//$("#Subject1").attr("checked", true);
 			//alert("check");
 		}
-		
+		// ------- Table2 ------
+		//$("#Table2").css({ color: "blue", font-size: '14pt', font-family: '標楷體' }).css('font-size','large').css("font-weight","bold");
+		$("#Table2").css("color","blue").css("font-family","DFKai-sb").css("font-size","14pt");
+		$("#Table2").find("td").eq(2).css("font-weight","bold");
+		$("#Table2").find("td").eq(4).css("font-weight","bold");
+		$("#Table2").find("td").eq(6).css("font-weight","bold");
+		$("#Table2").find("td").eq(8).css("font-weight","bold");
+		$("#Table2").find("td").eq(10).css("font-weight","bold");
 		<%
 		if course1=true then
-			%>  $("#Subject1").attr("checked", true).attr("disabled", true);  <%
+			%>  $("#Subject1").attr("checked", true).attr("disabled", true);  <%			
 		end if
 		if course2=true then
 			%>  $("#Subject2").attr("checked", true).attr("disabled", true);  <%
