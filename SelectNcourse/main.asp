@@ -22,7 +22,6 @@
 		.eq {
 			background-Color:#BDBDBD;
 		}
-		
 		</STYLE>
 		<title>選擇夜輔暨晚自習參加科目</title>
 		
@@ -757,7 +756,6 @@ $(document).ready(function() {
 		%>
 		
 	}
-	
 	
 	function confirm(event)
 	{

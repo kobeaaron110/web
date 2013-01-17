@@ -8,6 +8,21 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=big5" />
+		<script type="text/javascript" src="jquery.min.js"></script>
+		<STYLE type="text/css">
+		A {text-decoration:none}
+		A:hover {color: #FF0000; text-decoration: underline}
+		
+		.even {
+			background-Color:#EBEBEB;
+		} 
+		.odd {
+			background-Color:#FBFAFA;
+		} 
+		.eq {
+			background-Color:#BDBDBD;
+		}
+		</STYLE>
 		<!--<title>選擇夜輔暨晚自習參加科目</title> -->
 		<title>Select</title>
 	</head>
@@ -75,6 +90,7 @@ function Danger_type()
 	else
 		identity=rs("Password1")
 	end	if
+	'------- course_cnt:修課個數, total:總價錢
 	course_cnt=0
 	if course1=true then
 		course_cnt=course_cnt+1
@@ -163,7 +179,8 @@ function Danger_type()
 		end if
     end if
     Response.Write("</div>")
-    
+
+
 if flag=1 then
 	Response.Write("<table border='0' width='100%' ID='Table1'>")
 	Response.Write("<form method='POST' name='Print' action='print.asp' ID='Form1'>")
@@ -184,30 +201,23 @@ if flag=1 then
 	Response.Write("<br><td><span style='font-size: 16pt; font-family: 標楷體'> 參加科目：</span></td>")
 	Response.Write("<table border='1' width='100%' ID='Table2'>")
 	Response.Write("<tr>")
-	i=i+1
-	if (i mod 2)=1 then 
-		Response.Write("<td bgcolor=#EBEBEB width='60%'")
-	else 
-		Response.Write("<td bgcolor=#FBFAFA width='60%'")
-	end if
+	Response.Write("<td width='60% >")
+	
 	Response.Write("<p align='center'><font color='#000000'><span style='font-size: 16pt; font-family: 標楷體'>開　課　班　別</span></font>")
 	Response.Write("</td>")
-	if (i mod 2)=1 then 
-		Response.Write("<td bgcolor=#EBEBEB width='40%'>")
-	else 
-		Response.Write("<td bgcolor=#FBFAFA width='40%'>")
-	end if
+	
+	Response.Write("<td width='40% >")
+	
 	Response.Write("<p align='center'><font color='#000000'><span style='font-size: 16pt; font-family: 標楷體'>適合參加對象</span></font>")
 	Response.Write("</td>")
 	Response.Write("</tr>")
+
+  '------------------ course1 自習
   if course1=true then
 	Response.Write("<tr>")
-	i=i+1
-	if (i mod 2)=1 then 
-		Response.Write("<td bgcolor=#EBEBEB>")
-	else 
-		Response.Write("<td bgcolor=#FBFAFA>")
-	end if 
+	Response.Write("<td>")
+	
+	
 	if gradeyear=1 then 
 		if identity="pro" then
 			if course1=true then
@@ -235,11 +245,7 @@ if flag=1 then
 		'	Response.Write("<input type='checkbox' name='Subject1' disabled><span style='font-size: 14pt; font-family: 標楷體'> 高三晚自習班(星期一 ～ 星期五)</span></td>")
 		end if 
 	end if 
-	if (i mod 2)=1 then 
-		Response.Write("<td bgcolor=#EBEBEB>")
-	else 
-		Response.Write("<td bgcolor=#FBFAFA>")
-	end if 
+	Response.Write("<td>")
 	if identity="pro" then
 		Response.Write("<p align='left'><font color='#000000'><span style='font-size: 14pt'> 　 </span></font></td>")
 	else
@@ -247,15 +253,11 @@ if flag=1 then
 	end if 
 	Response.Write("</tr>")
   end if 
-						
+  
+  '------------------ course2 數學	
   if course2=true then
 	Response.Write("<tr>")
-	i=i+1
-	if (i mod 2)=1 then 
-		Response.Write("<td bgcolor=#EBEBEB>")
-	else 
-		Response.Write("<td bgcolor=#FBFAFA>")
-	end if 
+	Response.Write("<td>")
 	if gradeyear=1 then 
 		if identity="pro" then
 			if course2=true then
@@ -340,23 +342,14 @@ if flag=1 then
 			end if 
 		end if 
 	end if 
-	if (i mod 2)=1 then 
-		Response.Write("<td bgcolor=#EBEBEB>")
-	else 
-		Response.Write("<td bgcolor=#FBFAFA>")
-	end if 
+	Response.Write("<td>") 
 	Response.Write("<p align='center'><font color='#000000'><span style='font-size: 14pt; font-family: 標楷體'> 　 </span></font></td>")
 	Response.Write("</tr>")
   end if 
 		
   if course3=true then
 	Response.Write("<tr>")
-	i=i+1
-	if (i mod 2)=1 then 
-		Response.Write("<td bgcolor=#EBEBEB>")
-	else 
-		Response.Write("<td bgcolor=#FBFAFA>")
-	end if 
+	Response.Write("<td>")
 	if gradeyear=1 then 
 		if identity="pro" then
 			if course3=true then
@@ -364,11 +357,7 @@ if flag=1 then
 			'else
 			'	Response.Write("<input type='checkbox' name='Subject4' disabled><span style='font-size: 14pt; font-family: 標楷體'> 國保英文夜輔班</span></td>")
 			end if 
-			if (i mod 2)=1 then 
-				Response.Write("<td bgcolor=#EBEBEB>")
-			else 
-				Response.Write("<td bgcolor=#FBFAFA>")
-			end if 
+			Response.Write("<td>")
 			Response.Write("<p align='left'><font color='#000000'><span style='font-size: 14pt'> 　 </span></font></td>")
 			Response.Write("</tr>")
 		elseif left(classname,1)="普" then 
@@ -391,11 +380,7 @@ if flag=1 then
 				'	Response.Write("<input type='checkbox' name='Subject4' disabled><span style='font-size: 14pt; font-family: 標楷體'> 普一丙國英加強班(星期一)</span></td>")
 				end if 
 			end if 
-			if (i mod 2)=1 then 
-				Response.Write("<td bgcolor=#EBEBEB>")
-			else 
-				Response.Write("<td bgcolor=#FBFAFA>")
-			end if 
+			Response.Write("<td>")
 			Response.Write("<p align='left'><font color='#000000'><span style='font-size: 14pt; font-family: 標楷體'> 　 </span></font></td>")
 			Response.Write("</tr>")
 		else
@@ -404,11 +389,7 @@ if flag=1 then
 			'else
 			'	Response.Write("<input type='checkbox' name='Subject4' disabled><span style='font-size: 14pt; font-family: 標楷體'> 高一高職英文加強班(星期一)</span></td>")
 			end if 
-			if (i mod 2)=1 then 
-				Response.Write("<td bgcolor=#EBEBEB>")
-			else 
-				Response.Write("<td bgcolor=#FBFAFA>")
-			end if 
+			Response.Write("<td>")
 			Response.Write("<p align='left'><font color='#000000'><span style='font-size: 14pt; font-family: 標楷體'> 　 </span></font></td>")
 			Response.Write("</tr>")
 		end if 
@@ -419,11 +400,7 @@ if flag=1 then
 			'else
 			'	Response.Write("<input type='checkbox' name='Subject4' disabled><span style='font-size: 14pt; font-family: 標楷體'> 國保英文夜輔班</span></td>")
 			end if 
-			if (i mod 2)=1 then 
-				Response.Write("<td bgcolor=#EBEBEB>")
-			else 
-				Response.Write("<td bgcolor=#FBFAFA>")
-			end if 
+			Response.Write("<td>")
 			Response.Write("<p align='left'><font color='#000000'><span style='font-size: 14pt'> 　 </span></font></td>")
 			Response.Write("</tr>")
 		elseif left(classname,1)="普" then 
@@ -446,11 +423,7 @@ if flag=1 then
 				'	Response.Write("<input type='checkbox' name='Subject4' disabled><span style='font-size: 14pt; font-family: 標楷體'> 普二丙英文加強班(星期二)</span></td>")
 				end if 
 			end if 
-			if (i mod 2)=1 then 
-				Response.Write("<td bgcolor=#EBEBEB>")
-			else 
-				Response.Write("<td bgcolor=#FBFAFA>")
-			end if 
+			Response.Write("<td>")
 			Response.Write("<p align='left'><font color='#000000'><span style='font-size: 14pt; font-family: 標楷體'> 　 </span></font></td>")
 			Response.Write("</tr>")
 		else
@@ -459,11 +432,7 @@ if flag=1 then
 			'else
 			'	Response.Write("<input type='checkbox' name='Subject4' disabled><span style='font-size: 14pt; font-family: 標楷體'> 高二高職英文複習班(星期四)</span></td>")
 			end if 
-			if (i mod 2)=1 then 
-				Response.Write("<td bgcolor=#EBEBEB>")
-			else 
-				Response.Write("<td bgcolor=#FBFAFA>")
-			end if 
+			Response.Write("<td>") 
 			Response.Write("<p align='left'><font color='#000000'><span style='font-size: 14pt; font-family: 標楷體'> 　 </span></font></td>")
 			Response.Write("</tr>")
 		end if 
@@ -472,69 +441,30 @@ if flag=1 then
   if course4=true then
 	if left(classname,1)="商" or left(classname,1)="貿" or left(classname,1)="資" then
 		Response.Write("<tr>")
-		if (i mod 2)=1 then 
-			Response.Write("<td bgcolor=#EBEBEB>")
-		else 
-			Response.Write("<td bgcolor=#FBFAFA>")
-		end if 
+		Response.Write("<td>")
 		if course4=true then
 			Response.Write("<input type='checkbox' name='Subject7' checked disabled><font color='blue'><strong><span style='font-size: 14pt; font-family: 標楷體'> 會計總複習班(星期四)</span></strong></font></td>")
 		'else
 		'	Response.Write("<input type='checkbox' name='Subject7' disabled><span style='font-size: 14pt; font-family: 標楷體'> 會計總複習班(星期四)</span></td>")
 		end if 
-		if (i mod 2)=1 then 
-			Response.Write("<td bgcolor=#EBEBEB>")
-		else 
-			Response.Write("<td bgcolor=#FBFAFA>")
-		end if 
+		Response.Write("<td>") 
 		Response.Write("<p align='left'><font color='#000000'><span style='font-size: 14pt; font-family: 標楷體'> 商貿資科 </span></font></td>")
 		Response.Write("</tr>")
 	end if 
   end if 
-	
-'  if course4=true then
-'	if (gradeyear=3) and (left(classname,1)="廣" or left(classname,1)="畫") then 
-'		i=i+1
-'		Response.Write("<tr>")
-'		if (i mod 2)=1 then 
-'			Response.Write("<td bgcolor=#EBEBEB>")
-'		else 
-'			Response.Write("<td bgcolor=#FBFAFA>")
-'		end if 
-'		if course4=true then
-'			Response.Write("<input type='checkbox' name='Subject7' checked disabled><font color='blue'><strong><span style='font-size: 14pt; font-family: 標楷體'> 表現技法班(星期三)</span></strong></font></td>")
-'		'else
-'		'	Response.Write("<input type='checkbox' name='Subject7' disabled><span style='font-size: 14pt; font-family: 標楷體'> 麥克筆班(星期三)</span></td>")
-'		end if 
-'		if (i mod 2)=1 then 
-'			Response.Write("<td bgcolor=#EBEBEB>")
-'		else 
-'			Response.Write("<td bgcolor=#FBFAFA>")
-'		end if 
-'		Response.Write("<p align='left'><font color='#000000'><span style='font-size: 14pt; font-family: 標楷體'> 廣設、媒體科學生 </span></font></td>")
-'		Response.Write("</tr>")
-'	end if 
-'  end if 
+
 	
   if course5=true then
 	if (gradeyear=1 or gradeyear=2 or gradeyear=3) and (left(classname,1)="廣" or left(classname,1)="畫") and identity<>"pro" then 
 		i=i+1
 		Response.Write("<tr>")
-		if (i mod 2)=1 then 
-			Response.Write("<td bgcolor=#EBEBEB>")
-		else 
-			Response.Write("<td bgcolor=#FBFAFA>")
-		end if 
+		Response.Write("<td>")
 		if course5=true then
 			Response.Write("<input type='checkbox' name='Subject5' checked disabled><font color='blue'><strong><span style='font-size: 14pt; font-family: 標楷體'> 基礎圖學班(星期四)</span></strong></font></td>")
 		'else
 		'	Response.Write("<input type='checkbox' name='Subject5' disabled><span style='font-size: 14pt; font-family: 標楷體'> 基礎素描班(星期四)</span></td>")
 		end if 
-		if (i mod 2)=1 then 
-			Response.Write("<td bgcolor=#EBEBEB>")
-		else 
-			Response.Write("<td bgcolor=#FBFAFA>")
-		end if 
+		Response.Write("<td>")
 		Response.Write("<p align='left'><font color='#000000'><span style='font-size: 14pt; font-family: 標楷體'> 廣設、媒體科學生 </span></font></td>")
 		Response.Write("</tr>")
 	end if 
@@ -544,71 +474,22 @@ if flag=1 then
 	if (gradeyear=1 or gradeyear=2 or gradeyear=3) and (left(classname,1)="廣" or left(classname,1)="畫") and identity<>"pro" then 
 		i=i+1
 		Response.Write("<tr>")
-		if (i mod 2)=1 then 
-			Response.Write("<td bgcolor=#EBEBEB>")
-		else 
-			Response.Write("<td bgcolor=#FBFAFA>")
-		end if 
+		Response.Write("<td>")
 		if course6=true then
 			Response.Write("<input type='checkbox' name='Subject6' checked disabled><font color='blue'><strong><span style='font-size: 14pt; font-family: 標楷體'> 素描班(星期五)</span></strong></font></td>")
 		'else
 		'	Response.Write("<input type='checkbox' name='Subject6' disabled><span style='font-size: 14pt; font-family: 標楷體'> 進階素描班(星期四)</span></td>")
 		end if 
-		if (i mod 2)=1 then 
-			Response.Write("<td bgcolor=#EBEBEB>")
-		else 
-			Response.Write("<td bgcolor=#FBFAFA>")
-		end if 
+		Response.Write("<td>")
 		Response.Write("<p align='left'><font color='#000000'><span style='font-size: 14pt; font-family: 標楷體'> 廣設、媒體科學生 </span></font></td>")
 		Response.Write("</tr>")
-	'elseif gradeyear=2 and left(classname,1)="廣" then
-	'	i=i+1
-	'	Response.Write("<tr>")
-	'	if (i mod 2)=1 then 
-	'		Response.Write("<td bgcolor=#EBEBEB>")
-	'	else 
-	'		Response.Write("<td bgcolor=#FBFAFA>")
-	'	end if 
-	'	if course6=true then
-	'		Response.Write("<input type='checkbox' name='Subject6' checked disabled><font color='blue'><strong><span style='font-size: 14pt; font-family: 標楷體'> 進階素描班(星期四)</span></strong></font></td>")
-	'	'else
-	'	'	Response.Write("<input type='checkbox' name='Subject6' disabled><span style='font-size: 14pt; font-family: 標楷體'> 進階素描班(星期四)</span></td>")
-	'	end if 
-	'	if (i mod 2)=1 then 
-	'		Response.Write("<td bgcolor=#EBEBEB>")
-	'	else 
-	'		Response.Write("<td bgcolor=#FBFAFA>")
-	'	end if 
-	'	Response.Write("<p align='left'><font color='#000000'><span style='font-size: 14pt; font-family: 標楷體'> 廣設、媒體科學生 </span></font></td>")
-	'	Response.Write("</tr>")
+	
 	end if 
-  end if 
-		
-  if course7=true then
-	'if gradeyear=1 and (left(classname,1)="商" or left(classname,1)="資" or left(classname,1)="貿") and identity<>"pro" then 
-	'	i=i+1
-	'	Response.Write("<tr>")
-	'	if (i mod 2)=1 then 
-	'		Response.Write("<td bgcolor=#EBEBEB>")
-	'	else 
-	'		Response.Write("<td bgcolor=#FBFAFA>")
-	'	end if 
-	'	if course7=true then
-	'		Response.Write("<input type='checkbox' name='Subject7' checked disabled><font color='blue'><strong><span style='font-size: 14pt; font-family: 標楷體'> 高一會計加強班(星期五)</span></strong></font></td>")
-	'	'else
-	'	'	Response.Write("<input type='checkbox' name='Subject7' disabled><span style='font-size: 14pt; font-family: 標楷體'> 高一會計加強班(星期五)</span></td>")
-	'	end if 
-	'	if (i mod 2)=1 then 
-	'		Response.Write("<td bgcolor=#EBEBEB>")
-	'	else 
-	'		Response.Write("<td bgcolor=#FBFAFA>")
-	'	end if 
-	'	Response.Write("<p align='left'><font color='#000000'><span style='font-size: 14pt; font-family: 標楷體'> 商資貿科，欲加強會計者 </span></font></td>")
-	'	Response.Write("</tr>")
   end if 
 		
 	Response.Write("</table>")
 	
+	'---------------------------- 交通選擇 -----------------------------
 	Response.Write("</tr>")
 	Response.Write("<tr>")
 	Response.Write("<br><td><span style='font-size: 16pt; font-family: 標楷體'> 交通選擇：</span></td>")
@@ -660,7 +541,7 @@ if flag=1 then
 	Response.Write("</tr>")
 	Response.Write("<tr><br><br><br><br><br><br></tr>")
 	Response.Write("<tr>")
-	Response.Write("<td><p align='center'><span style='font-size: 16pt; font-family: 標楷體'> 中　　華　　民　　國　101　年　2　月　　　　日</span></td>")
+	Response.Write("<td><p align='center'><span style='font-size: 16pt; font-family: 標楷體'> 中　　華　　民　　國　102　年　1　月　　　　日</span></td>")
 	Response.Write("</tr>")
     
 	Response.Write("</form>")
@@ -673,4 +554,139 @@ end if
 
 	Response.Write("</body>")
 %> 
+
+<script type="text/javascript">
+$(document).ready(function() {
+	
+	alert("print ready");
+	
+	//
+	// initialization
+	//
+	initialAddClass();
+	initialCheckBox();
+	
+	//
+	// event
+	//
+	$("#nextsubmit").click(function(event) {
+	  //alert(event.pageX);
+	  //confirm(event);
+	});
+	
+	function initialAddClass()
+	{
+		//$(".table tr:odd").addClass("odd");
+		//$("#Table2 tr:even").addClass("even");
+		$('tr:even').removeClass();
+		$('tr:odd').removeClass();
+		//$('tr:even').addClass('even');
+		//$('tr:odd').addClass('odd');
+		$('#Table2 tr:even').addClass('even');
+		$('#Table2 tr:odd').addClass('odd');
+		//$('#Table2 tr:eq(0)').addClass('eq');
+	}
+	
+	function initialCheckBox()
+	{
+		if($("#Subject1").attr("checked") == 'checked')
+		{
+			//$("#Subject1").attr("checked", true);
+			//alert("check");
+		}
+		
+		<%
+		if course1=true then
+			%>  $("#Subject1").attr("checked", true);  <%
+		end if
+		if course2=true then
+			%>  $("#Subject2").attr("checked", true);  <%
+		end if
+		if course3=true then
+			%>  $("#Subject3").attr("checked", true);  <%
+		end if
+		if course4=true then
+			%>  $("#Subject4").attr("checked", true);  <%
+		end if
+		if course5=true then
+			%>  $("#Subject5").attr("checked", true);  <%
+		end if
+		if course6=true then
+			%>  $("#Subject6").attr("checked", true);  <%
+		end if
+		if course7=true then
+			%>  $("#Subject7").attr("checked", true);  <%
+		end if
+		
+		'---------- 交通 ---------- 
+		if busval=0 then
+			%>  $("#BusCode0").attr("checked", true);  <%
+		end if
+		if busval=1 then
+			%>  $("#BusCode1").attr("checked", true);  <%
+		end if
+		if busval=2 then
+			%>  $("#BusCode2").attr("checked", true);  <%
+		end if
+		if busval=3 then
+			%>  $("#BusCode3").attr("checked", true);  <%
+		end if
+		if busval=4 then
+			%>  $("#BusCode4").attr("checked", true);  <%
+		end if
+		if busval=5 then
+			%>  $("#BusCode5").attr("checked", true);  <%
+		end if
+		if busval=6 then
+			%>  $("#BusCode6").attr("checked", true);  <%
+		end if
+		if busval=7 then
+			%>  $("#BusCode7").attr("checked", true);  <%
+		end if
+		if busval=8 then
+			%>  $("#BusCode8").attr("checked", true);  <%
+		end if
+		if busval=9 then
+			%>  $("#BusCode9").attr("checked", true);  <%
+		end if
+		if busval=10 then
+			%>  $("#BusCode10").attr("checked", true);  <%
+		end if
+		if busval=11 then
+			%>  $("#BusCode11").attr("checked", true);  <%
+		end if
+		if busval=12 then
+			%>  $("#BusCode12").attr("checked", true);  <%
+		end if
+		if busval=13 then
+			%>  $("#BusCode13").attr("checked", true);  <%
+		end if
+		if busval=14 then
+			%>  $("#BusCode14").attr("checked", true);  <%
+		end if
+		if busval=15 then
+			%>  $("#BusCode15").attr("checked", true);  <%
+		end if
+		if busval=16 then
+			%>  $("#BusCode16").attr("checked", true);  <%
+		end if
+		if busval=17 then
+			%>  $("#BusCode17").attr("checked", true);  <%
+		end if
+		if busval=18 then
+			%>  $("#BusCode18").attr("checked", true);  <%
+		end if
+		if busval=19 then
+			%>  $("#BusCode19").attr("checked", true);  <%
+		end if
+		if busval=20 then
+			%>  $("#BusCode20").attr("checked", true);  <%
+		end if
+		
+		%>
+		
+	}
+	
+});
+</script>
 </html>
