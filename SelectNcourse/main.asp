@@ -31,6 +31,9 @@
 <Br><Br>
 <%
 	'\\203.68.204.6\e$\程式\101年\2月\1010203\SelectNcourse\main.asp
+	' rs("ProgramID1")=999 代表一定要選
+	' identity="pro" 代表是國保班
+	
 	Account=Session("LoginID")
 	Password=Session("Password")
 	UserLevel=Session("LogonLevel")
@@ -45,6 +48,7 @@
 	course5=rs("Course5")
 	course6=rs("Course6")
 	course7=rs("Course7")
+	' busval : BusCode
 	busval=rs("Bus")
 	busid=rs("BusStopID")
 	if isnull(rs("Password1")) then
@@ -434,17 +438,11 @@
 			Response.Write("</tr>")
 		elseif left(classname,1)="普" then 
 			if right(classname,1)="甲" then 
-				
 				Response.Write("<td><input id='Subject3' type='checkbox' name='Subject3' > 普一甲英文加強班(星期四)</td>")
-				 
 			elseif right(classname,1)="乙" then 
-				
 				Response.Write("<td><input id='Subject3' type='checkbox' name='Subject3' > 普一乙英文加強班(星期二)</td>")
-				
 			elseif right(classname,1)="丙" then 
-				
 				Response.Write("<td><input id='Subject3' type='checkbox' name='Subject3' > 普一丙英文加強班(星期一)</td>")
-				
 			end if 
 			
 			Response.Write("<td><p align='left'><font color='#000000'><span style='font-size: 12pt'> 　 </span></font></td>")
@@ -530,119 +528,121 @@
 	
 	Response.Write("</table>")
 	
-	' --------------------------- 交通 ---------------------------
+	' --------------------------- 交通 , busval : BusCode ---------------------------
 	Response.Write("<br><td> 交通選擇：（請選擇）　　　　　　　　　<a href='10002學期夜間輔導校車時間表.xls' target='_blank'>下載 夜輔校車路線站名一覽表</a></td>")
 	
 	Response.Write("<table border='1' width='100%' ID='Table3'>")
 	Response.Write("<tr>")
+	'busval : BusCode
+	'Bus_Stop1() : 車號='1'
 	if busval=0 then
-		Response.Write("<td bgcolor=#FBFAFA><input type='radio' value='0' name='Bus' checked  onclick='Bus_Stop0();'> 自行接送</td>")
+		Response.Write("<td bgcolor=#FBFAFA><input id='BusCode0' type='radio' value='0' name='Bus' checked  onclick='Bus_Stop0();'> 自行接送</td>")
 	else
-		Response.Write("<td bgcolor=#FBFAFA><input type='radio' value='0' name='Bus'  onclick='Bus_Stop0();'> 自行接送</td>")
+		Response.Write("<td bgcolor=#FBFAFA><input id='BusCode0' type='radio' value='0' name='Bus'  onclick='Bus_Stop0();'> 自行接送</td>")
 	end if
 	if busval=1 then
-		Response.Write("<td bgcolor=#FBFAFA><input type='radio' value='1' name='Bus' checked  onclick='Bus_Stop1();'> 1號車</td>")
+		Response.Write("<td bgcolor=#FBFAFA><input id='BusCode1' type='radio' value='1' name='Bus' checked  onclick='Bus_Stop1();'> 1號車</td>")
 	else
-		Response.Write("<td bgcolor=#FBFAFA><input type='radio' value='1' name='Bus'  onclick='Bus_Stop1();'> 1號車</td>")
+		Response.Write("<td bgcolor=#FBFAFA><input id='BusCode1' type='radio' value='1' name='Bus'  onclick='Bus_Stop1();'> 1號車</td>")
 	end if
 	if busval=2 then
-		Response.Write("<td bgcolor=#FBFAFA><input type='radio' value='2' name='Bus' checked  onclick='Bus_Stop6();'> 6號車</td>")
+		Response.Write("<td bgcolor=#FBFAFA><input id='BusCode2' type='radio' value='2' name='Bus' checked  onclick='Bus_Stop6();'> 6號車</td>")
 	else
-		Response.Write("<td bgcolor=#FBFAFA><input type='radio' value='2' name='Bus'  onclick='Bus_Stop6();'> 6號車</td>")
+		Response.Write("<td bgcolor=#FBFAFA><input id='BusCode2' type='radio' value='2' name='Bus'  onclick='Bus_Stop6();'> 6號車</td>")
 	end if
 	if busval=3 then
-		Response.Write("<td bgcolor=#FBFAFA><input type='radio' value='3' name='Bus' checked  onclick='Bus_Stop6B();'> 6B號車</td>")
+		Response.Write("<td bgcolor=#FBFAFA><input id='BusCode3' type='radio' value='3' name='Bus' checked  onclick='Bus_Stop6B();'> 6B號車</td>")
 	else
-		Response.Write("<td bgcolor=#FBFAFA><input type='radio' value='3' name='Bus'  onclick='Bus_Stop6B();'> 6B號車</td>")
+		Response.Write("<td bgcolor=#FBFAFA><input id='BusCode3' type='radio' value='3' name='Bus'  onclick='Bus_Stop6B();'> 6B號車</td>")
 	end if
 	if busval=4 then
-		Response.Write("<td bgcolor=#FBFAFA><input type='radio' value='4' name='Bus' checked  onclick='Bus_Stop6C();'> 6C號車</td>")
+		Response.Write("<td bgcolor=#FBFAFA><input id='BusCode4' type='radio' value='4' name='Bus' checked  onclick='Bus_Stop6C();'> 6C號車</td>")
 	else
-		Response.Write("<td bgcolor=#FBFAFA><input type='radio' value='4' name='Bus'  onclick='Bus_Stop6C();'> 6C號車</td>")
+		Response.Write("<td bgcolor=#FBFAFA><input id='BusCode4' type='radio' value='4' name='Bus'  onclick='Bus_Stop6C();'> 6C號車</td>")
 	end if
 	if busval=5 then
-		Response.Write("<td bgcolor=#FBFAFA><input type='radio' value='5' name='Bus' checked  onclick='Bus_Stop8();'> 8號車</td>")
+		Response.Write("<td bgcolor=#FBFAFA><input id='BusCode5' type='radio' value='5' name='Bus' checked  onclick='Bus_Stop8();'> 8號車</td>")
 	else
-		Response.Write("<td bgcolor=#FBFAFA><input type='radio' value='5' name='Bus'  onclick='Bus_Stop8();'> 8號車</td>")
+		Response.Write("<td bgcolor=#FBFAFA><input id='BusCode5' type='radio' value='5' name='Bus'  onclick='Bus_Stop8();'> 8號車</td>")
 	end if
 	if busval=6 then
-		Response.Write("<td bgcolor=#FBFAFA><input type='radio' value='6' name='Bus' checked  onclick='Bus_Stop9();'> 9號車</td>")
+		Response.Write("<td bgcolor=#FBFAFA><input id='BusCode6' type='radio' value='6' name='Bus' checked  onclick='Bus_Stop9();'> 9號車</td>")
 	else
-		Response.Write("<td bgcolor=#FBFAFA><input type='radio' value='6' name='Bus'  onclick='Bus_Stop9();'> 9號車</td>")
+		Response.Write("<td bgcolor=#FBFAFA><input id='BusCode6' type='radio' value='6' name='Bus'  onclick='Bus_Stop9();'> 9號車</td>")
 	end if
 	Response.Write("</tr>")
 	Response.Write("<tr>")
 	if busval=7 then
-		Response.Write("<td bgcolor=#FBFAFA><input type='radio' value='7' name='Bus' checked  onclick='Bus_Stop11();'> 11號車</td>")
+		Response.Write("<td bgcolor=#FBFAFA><input id='BusCode7' type='radio' value='7' name='Bus' checked  onclick='Bus_Stop11();'> 11號車</td>")
 	else
-		Response.Write("<td bgcolor=#FBFAFA><input type='radio' value='7' name='Bus'  onclick='Bus_Stop11();'> 11號車</td>")
+		Response.Write("<td bgcolor=#FBFAFA><input id='BusCode7' type='radio' value='7' name='Bus'  onclick='Bus_Stop11();'> 11號車</td>")
 	end if
 	if busval=8 then
-		Response.Write("<td bgcolor=#FBFAFA><input type='radio' value='8' name='Bus' checked  onclick='Bus_Stop11B();'> 11B號車</td>")
+		Response.Write("<td bgcolor=#FBFAFA><input id='BusCode8' type='radio' value='8' name='Bus' checked  onclick='Bus_Stop11B();'> 11B號車</td>")
 	else
-		Response.Write("<td bgcolor=#FBFAFA><input type='radio' value='8' name='Bus'  onclick='Bus_Stop11B();'> 11B號車</td>")
+		Response.Write("<td bgcolor=#FBFAFA><input id='BusCode8' type='radio' value='8' name='Bus'  onclick='Bus_Stop11B();'> 11B號車</td>")
 	end if
 	if busval=9 then
-		Response.Write("<td bgcolor=#FBFAFA><input type='radio' value='9' name='Bus' checked  onclick='Bus_Stop15();'> 15號車</td>")
+		Response.Write("<td bgcolor=#FBFAFA><input id='BusCode9' type='radio' value='9' name='Bus' checked  onclick='Bus_Stop15();'> 15號車</td>")
 	else
-		Response.Write("<td bgcolor=#FBFAFA><input type='radio' value='9' name='Bus'  onclick='Bus_Stop15();'> 15號車</td>")
+		Response.Write("<td bgcolor=#FBFAFA><input id='BusCode9' type='radio' value='9' name='Bus'  onclick='Bus_Stop15();'> 15號車</td>")
 	end if
 	if busval=10 then
-		Response.Write("<td bgcolor=#FBFAFA><input type='radio' value='10' name='Bus' checked  onclick='Bus_Stop16();'> 16號車</td>")
+		Response.Write("<td bgcolor=#FBFAFA><input id='BusCode10' type='radio' value='10' name='Bus' checked  onclick='Bus_Stop16();'> 16號車</td>")
 	else
-		Response.Write("<td bgcolor=#FBFAFA><input type='radio' value='10' name='Bus'  onclick='Bus_Stop16();'> 16號車</td>")
+		Response.Write("<td bgcolor=#FBFAFA><input id='BusCode10' type='radio' value='10' name='Bus'  onclick='Bus_Stop16();'> 16號車</td>")
 	end if
 	if busval=11 then
-		Response.Write("<td bgcolor=#FBFAFA><input type='radio' value='11' name='Bus' checked  onclick='Bus_Stop20();'> 20號車</td>")
+		Response.Write("<td bgcolor=#FBFAFA><input id='BusCode11' type='radio' value='11' name='Bus' checked  onclick='Bus_Stop20();'> 20號車</td>")
 	else
-		Response.Write("<td bgcolor=#FBFAFA><input type='radio' value='11' name='Bus'  onclick='Bus_Stop20();'> 20號車</td>")
+		Response.Write("<td bgcolor=#FBFAFA><input id='BusCode11' type='radio' value='11' name='Bus'  onclick='Bus_Stop20();'> 20號車</td>")
 	end if
 	if busval=12 then
-		Response.Write("<td bgcolor=#FBFAFA><input type='radio' value='12' name='Bus' checked  onclick='Bus_Stop20B();'> 20B號車</td>")
+		Response.Write("<td bgcolor=#FBFAFA><input id='BusCode12' type='radio' value='12' name='Bus' checked  onclick='Bus_Stop20B();'> 20B號車</td>")
 	else
-		Response.Write("<td bgcolor=#FBFAFA><input type='radio' value='12' name='Bus'  onclick='Bus_Stop20B();'> 20B號車</td>")
+		Response.Write("<td bgcolor=#FBFAFA><input id='BusCode12' type='radio' value='12' name='Bus'  onclick='Bus_Stop20B();'> 20B號車</td>")
 	end if
 	if busval=13 then
-		Response.Write("<td bgcolor=#FBFAFA><input type='radio' value='13' name='Bus' checked  onclick='Bus_Stop30();'> 30號車</td>")
+		Response.Write("<td bgcolor=#FBFAFA><input id='BusCode13' type='radio' value='13' name='Bus' checked  onclick='Bus_Stop30();'> 30號車</td>")
 	else
-		Response.Write("<td bgcolor=#FBFAFA><input type='radio' value='13' name='Bus'  onclick='Bus_Stop30();'> 30號車</td>")
+		Response.Write("<td bgcolor=#FBFAFA><input id='BusCode13' type='radio' value='13' name='Bus'  onclick='Bus_Stop30();'> 30號車</td>")
 	end if
 	Response.Write("</tr>")
 	Response.Write("<tr>")
 	if busval=14 then
-		Response.Write("<td bgcolor=#FBFAFA><input type='radio' value='14' name='Bus' checked  onclick='Bus_Stop33();'> 33號車</td>")
+		Response.Write("<td bgcolor=#FBFAFA><input id='BusCode14' type='radio' value='14' name='Bus' checked  onclick='Bus_Stop33();'> 33號車</td>")
 	else
-		Response.Write("<td bgcolor=#FBFAFA><input type='radio' value='14' name='Bus'  onclick='Bus_Stop33();'> 33號車</td>")
+		Response.Write("<td bgcolor=#FBFAFA><input id='BusCode14' type='radio' value='14' name='Bus'  onclick='Bus_Stop33();'> 33號車</td>")
 	end if
 	if busval=15 then
-		Response.Write("<td bgcolor=#FBFAFA><input type='radio' value='15' name='Bus' checked  onclick='Bus_Stop36();'> 36號車</td>")
+		Response.Write("<td bgcolor=#FBFAFA><input id='BusCode15' type='radio' value='15' name='Bus' checked  onclick='Bus_Stop36();'> 36號車</td>")
 	else
-		Response.Write("<td bgcolor=#FBFAFA><input type='radio' value='15' name='Bus'  onclick='Bus_Stop36();'> 36號車</td>")
+		Response.Write("<td bgcolor=#FBFAFA><input id='BusCode15' type='radio' value='15' name='Bus'  onclick='Bus_Stop36();'> 36號車</td>")
 	end if
 	if busval=16 then
-		Response.Write("<td bgcolor=#FBFAFA><input type='radio' value='16' name='Bus' checked  onclick='Bus_Stop39();'> 39號車</td>")
+		Response.Write("<td bgcolor=#FBFAFA><input id='BusCode16' type='radio' value='16' name='Bus' checked  onclick='Bus_Stop39();'> 39號車</td>")
 	else
-		Response.Write("<td bgcolor=#FBFAFA><input type='radio' value='16' name='Bus'  onclick='Bus_Stop39();'> 39號車</td>")
+		Response.Write("<td bgcolor=#FBFAFA><input id='BusCode16' type='radio' value='16' name='Bus'  onclick='Bus_Stop39();'> 39號車</td>")
 	end if
 	if busval=17 then
-		Response.Write("<td bgcolor=#FBFAFA><input type='radio' value='17' name='Bus' checked  onclick='Bus_Stop39B();'> 39B號車</td>")
+		Response.Write("<td bgcolor=#FBFAFA><input id='BusCode17' type='radio' value='17' name='Bus' checked  onclick='Bus_Stop39B();'> 39B號車</td>")
 	else
-		Response.Write("<td bgcolor=#FBFAFA><input type='radio' value='17' name='Bus'  onclick='Bus_Stop39B();'> 39B號車</td>")
+		Response.Write("<td bgcolor=#FBFAFA><input id='BusCode17' type='radio' value='17' name='Bus'  onclick='Bus_Stop39B();'> 39B號車</td>")
 	end if
 	if busval=18 then
-		Response.Write("<td bgcolor=#FBFAFA><input type='radio' value='18' name='Bus' checked  onclick='Bus_Stop39C();'> 39C號車</td>")
+		Response.Write("<td bgcolor=#FBFAFA><input id='BusCode18' type='radio' value='18' name='Bus' checked  onclick='Bus_Stop39C();'> 39C號車</td>")
 	else
-		Response.Write("<td bgcolor=#FBFAFA><input type='radio' value='18' name='Bus'  onclick='Bus_Stop39C();'> 39C號車</td>")
+		Response.Write("<td bgcolor=#FBFAFA><input id='BusCode18' type='radio' value='18' name='Bus'  onclick='Bus_Stop39C();'> 39C號車</td>")
 	end if
 	if busval=19 then
-		Response.Write("<td bgcolor=#FBFAFA><input type='radio' value='19' name='Bus' checked  onclick='Bus_Stop42();'> 42號車</td>")
+		Response.Write("<td bgcolor=#FBFAFA><input id='BusCode19' type='radio' value='19' name='Bus' checked  onclick='Bus_Stop42();'> 42號車</td>")
 	else
-		Response.Write("<td bgcolor=#FBFAFA><input type='radio' value='19' name='Bus'  onclick='Bus_Stop42();'> 42號車</td>")
+		Response.Write("<td bgcolor=#FBFAFA><input id='BusCode19' type='radio' value='19' name='Bus'  onclick='Bus_Stop42();'> 42號車</td>")
 	end if
 	if busval=20 then
-		Response.Write("<td bgcolor=#FBFAFA><input type='radio' value='20' name='Bus' checked  onclick='Bus_Stop60();'> 60號車</td>")
+		Response.Write("<td bgcolor=#FBFAFA><input id='BusCode20' type='radio' value='20' name='Bus' checked  onclick='Bus_Stop60();'> 60號車</td>")
 	else
-		Response.Write("<td bgcolor=#FBFAFA><input type='radio' value='20' name='Bus'  onclick='Bus_Stop60();'> 60號車</td>")
+		Response.Write("<td bgcolor=#FBFAFA><input id='BusCode20' type='radio' value='20' name='Bus'  onclick='Bus_Stop60();'> 60號車</td>")
 	end if
 	Response.Write("</tr>")
 	Response.Write("</table>")
@@ -683,7 +683,7 @@
 $(document).ready(function() {
 	//$("#Subject2").attr("checked", true);
 	//alert($("#Subject2").attr("checked") == 'checked');
-	alert("aaa1");
+	alert("ready");
 	
 	//
 	// initialization
@@ -732,24 +732,24 @@ $(document).ready(function() {
 		}
 		
 		<%
-		sql="Select * from PermRec INNER JOIN Login on RefID=PermRecID INNER JOIN Class on PermRec.ClassID=Class.ClassID where SNum='" & Account & "' And PermRec.Active=1"
-		set rs=conn.Execute(sql)
-		gradeyear=rs("ClassYear")
-		classname=rs("ClassName")
-		course1=rs("Course1")
-		course2=rs("Course2")
-		course3=rs("Course3")
-		course4=rs("Course4")
-		course5=rs("Course5")
-		course6=rs("Course6")
-		course7=rs("Course7")
-		busval=rs("Bus")
-		busid=rs("BusStopID")
-		if isnull(rs("Password1")) then
-			identity=""
-		else
-			identity=rs("Password1")
-		end	if
+		'sql="Select * from PermRec INNER JOIN Login on RefID=PermRecID INNER JOIN Class on PermRec.ClassID=Class.ClassID where SNum='" & Account & "' And PermRec.Active=1"
+		'set rs=conn.Execute(sql)
+		'gradeyear=rs("ClassYear")
+		'classname=rs("ClassName")
+		'course1=rs("Course1")
+		'course2=rs("Course2")
+		'course3=rs("Course3")
+		'course4=rs("Course4")
+		'course5=rs("Course5")
+		'course6=rs("Course6")
+		'course7=rs("Course7")
+		'busval=rs("Bus")
+		'busid=rs("BusStopID")
+		'if isnull(rs("Password1")) then
+			'identity=""
+		'else
+			'identity=rs("Password1")
+		'end	if
 		
 		if course1=true then
 			%>  $("#Subject1").attr("checked", true);  <%
@@ -771,6 +771,71 @@ $(document).ready(function() {
 		end if
 		if course7=true then
 			%>  $("#Subject7").attr("checked", true);  <%
+		end if
+		
+		'---------- 交通 ---------- 
+		if busval=0 then
+			%>  $("#BusCode0").attr("checked", true);  <%
+		end if
+		if busval=1 then
+			%>  $("#BusCode1").attr("checked", true);  <%
+		end if
+		if busval=2 then
+			%>  $("#BusCode2").attr("checked", true);  <%
+		end if
+		if busval=3 then
+			%>  $("#BusCode3").attr("checked", true);  <%
+		end if
+		if busval=4 then
+			%>  $("#BusCode4").attr("checked", true);  <%
+		end if
+		if busval=5 then
+			%>  $("#BusCode5").attr("checked", true);  <%
+		end if
+		if busval=6 then
+			%>  $("#BusCode6").attr("checked", true);  <%
+		end if
+		if busval=7 then
+			%>  $("#BusCode7").attr("checked", true);  <%
+		end if
+		if busval=8 then
+			%>  $("#BusCode8").attr("checked", true);  <%
+		end if
+		if busval=9 then
+			%>  $("#BusCode9").attr("checked", true);  <%
+		end if
+		if busval=10 then
+			%>  $("#BusCode10").attr("checked", true);  <%
+		end if
+		if busval=11 then
+			%>  $("#BusCode11").attr("checked", true);  <%
+		end if
+		if busval=12 then
+			%>  $("#BusCode12").attr("checked", true);  <%
+		end if
+		if busval=13 then
+			%>  $("#BusCode13").attr("checked", true);  <%
+		end if
+		if busval=14 then
+			%>  $("#BusCode14").attr("checked", true);  <%
+		end if
+		if busval=15 then
+			%>  $("#BusCode15").attr("checked", true);  <%
+		end if
+		if busval=16 then
+			%>  $("#BusCode16").attr("checked", true);  <%
+		end if
+		if busval=17 then
+			%>  $("#BusCode17").attr("checked", true);  <%
+		end if
+		if busval=18 then
+			%>  $("#BusCode18").attr("checked", true);  <%
+		end if
+		if busval=19 then
+			%>  $("#BusCode19").attr("checked", true);  <%
+		end if
+		if busval=20 then
+			%>  $("#BusCode20").attr("checked", true);  <%
 		end if
 		
 		%>
