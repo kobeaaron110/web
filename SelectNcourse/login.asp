@@ -130,7 +130,10 @@ function checkvalue() {
 }
 
 function numcheck(id, time) {
-	var re = /^[0-9]+$/;
+	// 不含 數字
+	//var re = /^[0-9]+$/;
+	// 不含 數字 與 A
+	var re = /^[A0-9]+$/;
     if (!re.test(time.value)){
 		document.getElementById(id).value = time.value.substring(0, time.value.length - 1);
 	}

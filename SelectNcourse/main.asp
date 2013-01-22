@@ -32,6 +32,10 @@
 	'\\203.68.204.6\e$\程式\101年\2月\1010203\SelectNcourse\main.asp
 	' rs("ProgramID1")=999 代表一定要選
 	' identity="pro" 代表是國保班
+	' ---- 有名額限制
+	'from CanSelectNCourse where CourseID=1"'高一高職數學加強班	  Course2
+	'from CanSelectNCourse where CourseID=2"'高一高職家事類數學A班	Course2
+	'from CanSelectNCourse where CourseID=3"'高一高職英文加強班	 Course3
 	
 	Account=Session("LoginID")
 	Password=Session("Password")
@@ -106,21 +110,28 @@
 	tel=Request.Form("Telephone")
 	mobile=Request.Form("Mobile")
     if Request.Form("nextsubmit")="下一步" then
+		application.lock
 		'if BusStopID<>"請選擇上下車站名" or Bus=0 or Bus=16 then
 		if BusStopID<>"請選擇上下車站名" or Bus=0 then
+			' 有名額限制的科目
+			' Credit: 代表選擇的順序
 			sql_Course03="Select * from CanSelectNCourse where CourseID=3"
 			set rs_Course03=conn.Execute(sql_Course03)
 			SortValue3=rs_Course03("Credit")
-			SelectedValue3=rs_Course03("Selected")			
+			SelectedValue3=rs_Course03("Selected")
 			sql_Course02="Select * from CanSelectNCourse where CourseID=2"
 			set rs_Course02=conn.Execute(sql_Course02)
 			SortValue2=rs_Course02("Credit")
-			SelectedValue2=rs_Course02("Selected")			
+			SelectedValue2=rs_Course02("Selected")
 			sql_Course01="Select * from CanSelectNCourse where CourseID=1"
 			set rs_Course01=conn.Execute(sql_Course01)
 			SortValue1=rs_Course01("Credit")
 			SelectedValue1=rs_Course01("Selected")
-			' -------------------------- 第二科OR第三科有選 且 一年級 不是普科
+			' ---- 有名額限制
+			'from CanSelectNCourse where CourseID=1"'高一高職數學加強班	  Course2
+			'from CanSelectNCourse where CourseID=2"'高一高職家事類數學A班	Course2
+			'from CanSelectNCourse where CourseID=3"'高一高職英文加強班	 Course3
+			' -------------------------- Course2 OR Course3 有選 且 高一年級 不是普科 是職科
 			' continue = 1 代表 要做 Update 
 			if (Subject2=1 or Subject3=1) and gradeyear=1 and left(classname,1)<>"普" then
 				continue=0
@@ -129,6 +140,7 @@
 				update3=0
 				if Subject3=1 then
 					if rs_Course03("Selected")>=rs_Course03("StuLimit") then
+						' 已額滿
 						Response.Write("<td><p align='center'><span style='font-size: 18pt; color:#FF0000; font-family: 標楷體'><strong>『英文加強班』已額滿，請重新選擇後再繼續！</strong></span><br><br></td>")
 						continue=0
 					else
@@ -176,6 +188,7 @@
 			else
 				' -------------------------------------------------- Update CanSelectNCourse
 				if continue=1 then
+					'-------- update1
 					if update1=1 then
 						if rs("ProgramID1")=0 then
 							sql_updateCourse1="Update CanSelectNCourse Set Selected=" & SelectedValue1+1 & ",Credit=" & SortValue1+1 & " Where CourseID=1"
@@ -188,6 +201,7 @@
 					if sql_updateCourse1<>"" then
 						set rs_updateCourse1=conn.Execute(sql_updateCourse1)
 					end if
+					'-------- update2
 					if update2=1 then
 						if rs("ProgramID2")=0 then
 							sql_updateCourse2="Update CanSelectNCourse Set Selected=" & SelectedValue2+1 & ",Credit=" & SortValue2+1 & " Where CourseID=2"
@@ -200,6 +214,7 @@
 					if sql_updateCourse2<>"" then
 						set rs_updateCourse2=conn.Execute(sql_updateCourse2)
 					end if
+					'-------- update3
 					if update3=1 then
 						if rs("ProgramID3")=0 then
 							sql_updateCourse3="Update CanSelectNCourse Set Selected=" & SelectedValue3+1 & ",Credit=" & SortValue3+1 & " Where CourseID=3"
@@ -217,6 +232,7 @@
 					sql_update="Update PermRec Set Course1=" & Subject1 & ", Course2=" & Subject2 & ", Course3=" & Subject3 & ", Course4=" & Subject4
 					sql_update=sql_update+", Course5=" & Subject5 & ", Course6=" & Subject6 & ", Course7=" & Subject7 & ", Bus=" & Bus & ", BusStopID='" & BusStopID
 					sql_update=sql_update+"', Tel='" & tel & "', Mobile='" & mobile & "'"
+					'-------- update1
 					if update1=1 then
 						if rs("ProgramID1")=0 then
 							sql_update=sql_update+", ProgramID1=" & SortValue1+1 & ", ProgramDate1='" & now & "'"
@@ -226,6 +242,7 @@
 							sql_update=sql_update+", ProgramID1=0, ProgramDate1='" & now & "'"
 						end if
 					end if
+					'-------- update2
 					if update2=1 then
 						if rs("ProgramID2")=0 then
 							sql_update=sql_update+", ProgramID2=" & SortValue2+1 & ", ProgramDate2='" & now & "'"
@@ -235,6 +252,7 @@
 							sql_update=sql_update+", ProgramID2=0, ProgramDate2='" & now & "'"
 						end if
 					end if
+					'-------- update3
 					if update3=1 then
 						if rs("ProgramID3")=0 then
 							sql_update=sql_update+", ProgramID3=" & SortValue3+1 & ", ProgramDate3='" & now & "'"
@@ -249,6 +267,7 @@
 					'Response.Write("sql_update=" & sql_update)
 					set rs_update=conn.Execute(sql_update)
 					
+					application.unlock
 					Response.Redirect "print.asp"
 				end if
 			end if
@@ -256,6 +275,7 @@
 			Response.Write("<td><span style='font-size: 18pt; color:#FF0000; font-family: 標楷體'><strong>上下車站名未選取，請重新填寫電電話，重新選擇科目後；</strong></span><br><br></td>")
 			Response.Write("<td><span style='font-size: 18pt; color:#FF0000; font-family: 標楷體'><strong>點擇校車車次後，再選擇上下車站名，再按下一步繼續！</strong></span><br><br></td>")
 		end if
+		application.unlock
 	end if '下一步
 	
 	' ------------------------------------------------------------------------------- 
@@ -461,7 +481,7 @@
 				Response.Write("<p align='left'><font color='#000000'><span style='font-size: 12pt'> 　 </span></font></td>")
 				Response.Write("</tr>")
 			end if 
-		' ------------- course3	英文 高二	
+		' --------- course3	英文 高二	
 		elseif gradeyear=2 then
 			Response.Write("<tr>")
 			Response.Write("<td>")
@@ -527,6 +547,11 @@
 			Response.Write("</tr>")
 		end if 
 	end if
+	' --------------------------- course7
+	if course7=true or course7=false then
+		
+	end if
+	
 	
 	
 	Response.Write("</table>")
@@ -602,7 +627,7 @@
 $(document).ready(function() {
 	//$("#Subject2").attr("checked", true);
 	//alert($("#Subject2").attr("checked") == 'checked');
-	alert("ready");
+	//alert("ready");
 	
 	//
 	// initialization
@@ -763,7 +788,7 @@ $(document).ready(function() {
 	
 	function confirm(event)
 	{
-		alert("confirm");
+		//alert("confirm");
 	}
 	
 });

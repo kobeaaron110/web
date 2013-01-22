@@ -418,7 +418,10 @@ if flag=1 then
 			Response.Write("</tr>")
 		end if 
 	end if
-	
+	' --------------------------- course7
+	if course6=true then
+		
+	end if
 	
 	Response.Write("</table>")
 	
@@ -474,7 +477,7 @@ if flag=1 then
 	Response.Write("</tr>")
 	Response.Write("<tr><br><br><br><br><br><br></tr>")
 	Response.Write("<tr>")
-	Response.Write("<td><p align='center'><span style='font-size: 16pt; font-family: 標楷體'> 中　　華　　民　　國　102　年　1　月　　　　日</span></td>")
+	Response.Write("<td><p align='center'><span style='font-size: 16pt; font-family: 標楷體'> 中　　華　　民　　國　102　年　2　月　　　　日</span></td>")
 	Response.Write("</tr>")
     
 	Response.Write("</form>")
@@ -490,8 +493,7 @@ end if
 
 <script type="text/javascript">
 $(document).ready(function() {
-	
-	alert("print ready");
+	//alert("print ready");
 	
 	//
 	// initialization
