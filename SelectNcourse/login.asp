@@ -18,8 +18,7 @@ endday=rs("EndDate")
 if len(Request.Form("cmd1"))>0 then              
     muserid=Trim(Request.Form("id"))
     mpasswd=Request.Form("password")
-	'//-- aaron Not
-	if endday<now or startday>now then 'and muserid<>"P101825460"
+    if endday<now or startday>now then 'and muserid<>"P101825460"
 %>
 	<script language="JavaScript">
 		alert("\n不在時間期限內，\n您已無權限進入！");
@@ -53,8 +52,7 @@ if len(Request.Form("cmd1"))>0 then
 			else
 				sql_class="Select * from PermRec INNER JOIN Class on PermRec.ClassID=Class.ClassID where SNum='" & muserid & "'"
 				set rs_class=conn.Execute(sql_class)
-			    
-				if rs("Active")=0 then
+			    if rs("Active")=0 then
 %>
 	<script language="JavaScript">
 		alert("\n您已無權限進入！");
@@ -62,7 +60,7 @@ if len(Request.Form("cmd1"))>0 then
 	</script>
 <%
 					flag=0              
-			    elseif left(rs_class("ClassName"),1)="普" then 'rs_class("ClassName")="普三甲" or rs_class("ClassName")="普三乙" then
+			    elseif rs_class("ClassYear")>1 or left(rs_class("ClassName"),1)="普" then 'rs_class("ClassName")="普三甲" or rs_class("ClassName")="普三乙" then
 %>
 	<script language="JavaScript">
 		alert("\n您無須填寫！");
@@ -74,7 +72,6 @@ if len(Request.Form("cmd1"))>0 then
 					Session("LoginID") = rs("LoginName")
 					Session("Password") = mpasswd
 					Session("LogonLevel") = rs("RefType")
-					
 					LoginTimes = rs("LoginTimes")+1
 					sql1="Update Login Set LoginDate='" & date & " " & Hour(time( )) & right(time( ),6) & "'"
 					sql1=sql1+",LoginIP='" & Request.ServerVariables("REMOTE_HOST") & "',LoginTimes=" & LoginTimes & " Where LoginName='"+muserid+"'"
@@ -97,11 +94,11 @@ end if
 <title>夜輔暨晚自習選擇登入帳號</title>
 </head>
 <script language="Javascript"> 
-function checkvalue() {
+function checkvalue() { 
 	var tmp	= login.id.value.toLowerCase(); 
-	if(tmp.length < 6 ){
+	if(tmp.length < 6 ){ 
 	alert("請輸入6碼的帳號 (學號)!"); 
-	return false;
+	return false; 
 	} 
 	for(p = 0 ; p < 2 ; p++){ 
 	tmp2 = tmp.substring(p,p+1); 
@@ -127,21 +124,7 @@ function checkvalue() {
 		} 
 	} 
 	return true; 
-}
-
-function numcheck(id, time) {
-	// 不含 數字
-	//var re = /^[0-9]+$/;
-	// 不含 數字 與 A
-	var re = /^[A0-9]+$/;
-    if (!re.test(time.value)){
-		document.getElementById(id).value = time.value.substring(0, time.value.length - 1);
-	}
-	if (!re.test(document.getElementById(id).value)){
-		document.getElementById(id).value = "";
-	}
-}
- 
+} 
 </script>  
 <body onload="document.login.id.focus()">
 <h2 align="center">
@@ -159,7 +142,7 @@ function numcheck(id, time) {
         <table border="0" width="100%">
           <tr>
             <td width="45%" align="right">帳號 (6位學號 )：</td>
-            <td width="50%"><input type="text" id="acount"  name="id" size="10" maxlength="6" value="<%=session("loginid")%>" onFocus="this.style.backgroundColor='#ECFFFF'" onBlur="this.style.backgroundColor='#FFFFFF'" onMouseOver="this.focus()" onkeyup="numcheck(this.id,this)" ></td>
+            <td width="50%"><input type="text" name="id" size="10" maxlength="6" value="<%=session("loginid")%>" onFocus="this.style.backgroundColor='#ECFFFF'" onBlur="this.style.backgroundColor='#FFFFFF'" onMouseOver="this.focus()"></td>
           </tr>
           <tr>
             <td width="45%" align="right">密碼 (身分證號碼，第一碼英文大小寫皆可 )：</td>
@@ -167,7 +150,7 @@ function numcheck(id, time) {
           </tr>
           <tr>
             <td width="45%" align="right" height="60"></td>
-            <td width="50%" height="60"><input type="submit" value="確定" name="cmd1" onclick="checkvalue()"> 
+            <td width="50%" height="60"><input type="submit" value="確定" name="cmd1" onclick="return checkvalue()"> 
               <input type="reset" value="重新輸入" name="B2"></td>
           </tr>
         </table>
