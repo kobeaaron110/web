@@ -212,34 +212,31 @@ if flag=1 then
 	Response.Write("</td>")
 	Response.Write("</tr>")
 
-    '---------------------------- course1   自習
-	' --------------------------- course1	自習 高一
+    '---------------------------- course1  自習 高一 高二 高三
+	' --------------------------- course1  自習 高一
 	if course1=true  then
 		Response.Write("<tr>")
-		Response.Write("<td>")
 		if gradeyear=1 then
-			if identity="pro" then
-				'if course1=true then
-				Response.Write("<input id='Subject1' type='checkbox' name='Subject1' > 國保晚自習班(星期一 ～ 星期五)</td>")
+			if identity="pro" then				
+				Response.Write("<td><input id='Subject1' type='checkbox' name='Subject1' > 國保晚自習班(星期一 ～ 星期五)</td>")
 			else
-				Response.Write("<input id='Subject1' type='checkbox' name='Subject1' > 高一晚自習班(星期一 ～ 星期五)</td>")
+				Response.Write("<td><input id='Subject1' type='checkbox' name='Subject1' > 高一晚自習班(星期一 ～ 星期五)</td>")
 			end if 
 		elseif gradeyear=2 then
 			if identity="pro" then
-				Response.Write("<input id='Subject1' type='checkbox' name='Subject1' > 國保晚自習班(星期一 ～ 星期五)</td>")
+				Response.Write("<td><input id='Subject1' type='checkbox' name='Subject1' > 國保晚自習班(星期一 ～ 星期五)</td>")
 			else
-				Response.Write("<input id='Subject1' type='checkbox' name='Subject1' > 高二晚自習班(星期一 ～ 星期五)</td>")
+				Response.Write("<td><input id='Subject1' type='checkbox' name='Subject1' > 高二晚自習班(星期一 ～ 星期五)</td>")
 			end if 
-		else 'gradeyear=3 
-			Response.Write("<input id='Subject1' type='checkbox' name='Subject1' > 高三晚自習班(星期一 ～ 星期五)</td>")
+		else 'gradeyear=3 then 
+			Response.Write("<td><input id='Subject1' type='checkbox' name='Subject1' > 高三晚自習班(星期一 ～ 星期五)</td>")
 		end if 
 		
 		' Table2 欄位 : 適合參加對象 
-		Response.Write("<td>")
 		if identity="pro" then
-			Response.Write("<p align='left'><font color='#000000'><span style='font-size: 12pt'> 　 </span></font></td>")
+			Response.Write("<td><p align='left'><font color='#000000'><span style='font-size: 12pt'> 　 </span></font></td>")
 		else
-			Response.Write("<p align='left'><font color='#000000'><span style='font-size: 14pt'> 全體學生 </span></font></td>")
+			Response.Write("<td><p align='left'><font color='#000000'><span style='font-size: 12pt'> 全體學生 </span></font></td>")
 		end if 
 		Response.Write("</tr>")
 	end if 'course1
@@ -247,137 +244,124 @@ if flag=1 then
 	if course2=true  then
 		if gradeyear=1 then
 			Response.Write("<tr>")
-			Response.Write("<td>")
 			if identity="pro" then
-				Response.Write("<input id='Subject2' type='checkbox' name='Subject2'> 國保數學夜輔班</td>")
+				Response.Write("<td><input id='Subject2' type='checkbox' name='Subject2'> 國保數學夜輔班</td>")
 			elseif left(classname,1)="普" then 
-				if right(classname,1)="甲" then 
-					
-					Response.Write("<input id='Subject2' type='checkbox' name='Subject2'> 普一甲數學加強班(星期二)</td>")
-					
+				if right(classname,1)="甲" then 			
+					Response.Write("<td><input id='Subject2' type='checkbox' name='Subject2'> 普一甲數學加強班(星期二)</td>")					
 				elseif right(classname,1)="乙" then 
-					
-					Response.Write("<input id='Subject2' type='checkbox' name='Subject2'> 普一乙數學加強班(星期三)</td>")
-					 
+					Response.Write("<td><input id='Subject2' type='checkbox' name='Subject2'> 普一乙數學加強班(星期二)</td>")
 				elseif right(classname,1)="丙" then 
-					
-					Response.Write("<input id='Subject2' type='checkbox' name='Subject2'> 普一丙數學加強班(星期三)</td>")
-					
+					Response.Write("<td><input id='Subject2' type='checkbox' name='Subject2'> 普一丙數學加強班(星期四)</td>")
 				end if 
 			elseif left(classname,1)="幼" or left(classname,1)="美" then
 				if rs("ProgramID2")=999 or flag2="額滿" then
-					Response.Write("<input id='Subject2' type='checkbox' name='Subject2' disabled> 高一高職家事類數學 A班(星期一)</td>")
+					Response.Write("<td><input id='Subject2' type='checkbox' name='Subject2' disabled> 高一高職家事類數學 A班(星期一)</td>")
 				else
-					Response.Write("<input id='Subject2' type='checkbox' name='Subject2'> 高一高職家事類數學 A班(星期一)</td>")
+					Response.Write("<td><input id='Subject2' type='checkbox' name='Subject2'> 高一高職家事類數學 A班(星期一)</td>")
 				end if
 			else
 				if rs("ProgramID1")=999 or flag1="額滿" then
-					Response.Write("<input id='Subject2' type='checkbox' name='Subject2' disabled> 高一高職商業類數學 B班(星期一)</td>")
+					Response.Write("<td><input id='Subject2' type='checkbox' name='Subject2' disabled> 高一高職商業類數學 B班(星期一)</td>")
 				else
-					Response.Write("<input id='Subject2' type='checkbox' name='Subject2'> 高一高職商業類數學 B班(星期一)</td>")
+					Response.Write("<td><input id='Subject2' type='checkbox' name='Subject2'> 高一高職商業類數學 B班(星期一)</td>")
 				end if
 			end if 
-			Response.Write("<td>")
-			Response.Write("<p align='left'><font color='#000000'><span style='font-size: 12pt'> 　 </span></font></td>")
+			
+			Response.Write("<td><p align='left'><font color='#000000'><span style='font-size: 12pt'> 　 </span></font></td>")
 			Response.Write("</tr>")
 		' ------------- course2	數學 高二
 		elseif gradeyear=2 then
-			Response.Write("<tr>")
-			Response.Write("<td>")
+			'Response.Write("<tr>")
+			'Response.Write("<td>")
 			if identity="pro" then
-				
-				Response.Write("<input id='Subject2' type='checkbox' name='Subject2' > 國保數學夜輔班</td>")
-				
-			elseif left(classname,1)="普" then 
-				if right(classname,1)="甲" then 
-					
-					Response.Write("<input id='Subject2' type='checkbox' name='Subject2' > 普二甲數學加強班(星期二)</td>")
-					
+				Response.Write("<tr>")
+				Response.Write("<td><input id='Subject2' type='checkbox' name='Subject2' > 國保數學夜輔班</td>")
+				Response.Write("<td><p align='left'><font color='#000000'><span style='font-size: 12pt'> 　 </span></font></td>")
+				Response.Write("</tr>")
+			elseif left(classname,1)="普" then
+				Response.Write("<tr>")
+				if right(classname,1)="甲" then 				
+					Response.Write("<td><input id='Subject2' type='checkbox' name='Subject2' > 普二甲數學加強班(星期二)</td>")
 				elseif right(classname,1)="乙" then 
-					
-					Response.Write("<input id='Subject2' type='checkbox' name='Subject2' > 普二乙數學加強班(星期五)</td>")
-					
+					Response.Write("<td><input id='Subject2' type='checkbox' name='Subject2' > 普二乙數學加強班(星期二)</td>")
 				elseif right(classname,1)="丙" then 
-					
-					Response.Write("<input id='Subject2' type='checkbox' name='Subject2' > 普二丙數學加強班(星期三)</td>")
-					
+					Response.Write("<td><input id='Subject2' type='checkbox' name='Subject2' > 普二丙數學加強班(星期五)</td>")			
+				Response.Write("<td><p align='left'><font color='#000000'><span style='font-size: 12pt'> 　 </span></font></td>")
+				Response.Write("</tr>")	
 				end if 
 			elseif left(classname,1)="幼" or left(classname,1)="美" then 
-				Response.Write("<input id='Subject2' type='checkbox' name='Subject2' > 高二高職家事類數學 A班(星期三)</td>")
+				'Response.Write("<tr>")
+				'Response.Write("<td><input id='Subject2' type='checkbox' name='Subject2' > 高二高職家事類數學 A班(星期三)</td>")
+				'Response.Write("<td><p align='left'><font color='#000000'><span style='font-size: 12pt'> 　 </span></font></td>")
+				'Response.Write("</tr>")
 			else
-				Response.Write("<input id='Subject2' type='checkbox' name='Subject2' > 高二高職商業類數學 B班(星期三)</td>")
+				'Response.Write("<tr>")
+				'Response.Write("<td><input id='Subject2' type='checkbox' name='Subject2' > 高二高職商業類數學 B班(星期三)</td>")
+				'Response.Write("<td><p align='left'><font color='#000000'><span style='font-size: 12pt'> 　 </span></font></td>")
+				'Response.Write("</tr>")
 			end if 
-			Response.Write("<td>")
-			Response.Write("<p align='left'><font color='#000000'><span style='font-size: 12pt'> 　 </span></font></td>")
-			Response.Write("</tr>")
+			
 		end if 
 	end if  'course2
 	' --------------------------- course3	英文 高一
 	if course3=true  then
 		if gradeyear=1 then
 			Response.Write("<tr>")
-			Response.Write("<td>") 
 			if identity="pro" then
-				
-				Response.Write("<input id='Subject3' type='checkbox' name='Subject3' > 國保英文夜輔班</td>")
-				
-				Response.Write("<p align='left'><font color='#000000'><span style='font-size: 12pt'> 　 </span></font></td>")
-				Response.Write("</tr>")
+				Response.Write("<td><input id='Subject3' type='checkbox' name='Subject3' > 國保英文夜輔班</td>")
+				Response.Write("<td><p align='left'><font color='#000000'><span style='font-size: 12pt'> 　 </span></font></td>")
 			elseif left(classname,1)="普" then 
 				if right(classname,1)="甲" then 
-					Response.Write("<input id='Subject3' type='checkbox' name='Subject3' > 普一甲英文加強班(星期四)</td>")
+					Response.Write("<td><input id='Subject3' type='checkbox' name='Subject3' > 普一甲英文夜輔班(星期五)</td>")
 				elseif right(classname,1)="乙" then 
-					Response.Write("<input id='Subject3' type='checkbox' name='Subject3' > 普一乙英文加強班(星期二)</td>")
+					Response.Write("<td><input id='Subject3' type='checkbox' name='Subject3' > 普一乙英文夜輔班(星期五)</td>")
 				elseif right(classname,1)="丙" then 
-					Response.Write("<input id='Subject3' type='checkbox' name='Subject3' > 普一丙英文加強班(星期一)</td>")
+					Response.Write("<td><input id='Subject3' type='checkbox' name='Subject3' > 普一丙英文夜輔班(星期五)</td>")
 				end if 
-				Response.Write("<td>") 
-				Response.Write("<p align='left'><font color='#000000'><span style='font-size: 12pt'> 　 </span></font></td>")
-				Response.Write("</tr>")
+				
+				Response.Write("<td><p align='left'><font color='#000000'><span style='font-size: 12pt'> 　 </span></font></td>")
 			else
 				if course3=true then
 					if rs("ProgramID1")=999 then
-						Response.Write("<input id='Subject3' type='checkbox' name='Subject3'  disabled> 高一高職英文加強班(星期二)</td>")
+						Response.Write("<td><input id='Subject3' type='checkbox' name='Subject3'  disabled> 高一高職英文加強班(星期二)</td>")
 					else
-						Response.Write("<input id='Subject3' type='checkbox' name='Subject3' > 高一高職英文加強班(星期二)</td>")
+						Response.Write("<td><input id='Subject3' type='checkbox' name='Subject3' > 高一高職英文加強班(星期二)</td>")
 					end if
 				else
 					if flag3="額滿" then
-						Response.Write("<input id='Subject3' type='checkbox' name='Subject3' disabled> 高一高職英文加強班(星期二)　　<strong>《" & flag3 & "》</strong></td>")
+						Response.Write("<td><input id='Subject3' type='checkbox' name='Subject3' disabled> 高一高職英文加強班(星期二)　　<strong>《" & flag3 & "》</strong></td>")
 					else
-						Response.Write("<input id='Subject3' type='checkbox' name='Subject3'> 高一高職英文加強班(星期二)</td>")
+						Response.Write("<td><input id='Subject3' type='checkbox' name='Subject3'> 高一高職英文加強班(星期二)</td>")
 					end if
 				end if 
-				Response.Write("<td>") 
-				Response.Write("<p align='left'><font color='#000000'><span style='font-size: 12pt'> 　 </span></font></td>")
+				Response.Write("<td><p align='left'><font color='#000000'><span style='font-size: 12pt'> 　 </span></font></td>")
 				Response.Write("</tr>")
 			end if 
-		' ------------- course3	英文 高二	
+		' --------- course3	英文 高二	
 		elseif gradeyear=2 then
-			Response.Write("<tr>")
-			Response.Write("<td>")
 			if identity="pro" then
-				
-				Response.Write("<input id='Subject3' type='checkbox' name='Subject3' > 國保英文夜輔班</td>")
-				Response.Write("<td>") 
-				Response.Write("<p align='left'><font color='#000000'><span style='font-size: 12pt'> 　 </span></font></td>")
+				Response.Write("<tr>")
+				Response.Write("<td><input id='Subject3' type='checkbox' name='Subject3' > 國保英文夜輔班</td>")
+				Response.Write("<td><p align='left'><font color='#000000'><span style='font-size: 12pt'> 　 </span></font></td>")
 				Response.Write("</tr>")
-			elseif left(classname,1)="普" then 
+			elseif left(classname,1)="普" then
+				Response.Write("<tr>")
 				if right(classname,1)="甲" then 
-					Response.Write("<input id='Subject3' type='checkbox' name='Subject3' > 普二甲國英加強班(星期三)</td>")
+					Response.Write("<td><input id='Subject3' type='checkbox' name='Subject3' > 普二甲英文夜輔班(星期三)</td>")
 				elseif right(classname,1)="乙" then 
-					Response.Write("<input id='Subject3' type='checkbox' name='Subject3' > 普二乙國英加強班(星期一)</td>")
+					Response.Write("<td><input id='Subject3' type='checkbox' name='Subject3' > 普二乙英文夜輔班(星期三)</td>")
 				elseif right(classname,1)="丙" then 
-					Response.Write("<input id='Subject3' type='checkbox' name='Subject3' > 普二丙國英加強班(星期一、五)</td>")
+					Response.Write("<td><input id='Subject3' type='checkbox' name='Subject3' > 普二丙英文夜輔班(星期三)</td>")
 				end if 
 				
 				Response.Write("<td><p align='left'><font color='#000000'><span style='font-size: 12pt'> 　 </span></font></td>")
 				Response.Write("</tr>")
 			else
-				Response.Write("<input id='Subject3' type='checkbox' name='Subject3' > 高二高職英文複習班(星期四)</td>")
-				
-				Response.Write("<td><p align='left'><font color='#000000'><span style='font-size: 12pt'> 　 </span></font></td>")
-				Response.Write("</tr>")
+				'Response.Write("<tr>")
+				'Response.Write("<td><input id='Subject3' type='checkbox' name='Subject3' > 高二高職英文複習班(星期四)</td>")		
+				'Response.Write("<td><p align='left'><font color='#000000'><span style='font-size: 12pt'> 　 </span></font></td>")
+				'Response.Write("</tr>")
 			end if 
 		end if 
 	end if  'course3
@@ -385,41 +369,37 @@ if flag=1 then
 	if course4=true  then
 		if gradeyear=3 and (left(classname,1)="商" or left(classname,1)="貿" or left(classname,1)="資") and identity<>"pro" then 
 			
-			Response.Write("<tr>")
-			Response.Write("<td>") 
-			Response.Write("<input id='Subject4' type='checkbox' name='Subject4'> 會計總複習班(星期四)</td>")
+			'Response.Write("<tr>")
 			
-			Response.Write("<td><p align='left'><font color='#000000'><span style='font-size: 12pt'> 商貿資科 </span></font></td>")
-			Response.Write("</tr>")
+			'Response.Write("<td><input id='Subject4' type='checkbox' name='Subject4'> 會計總複習班(星期四)</td>")
+			
+			'Response.Write("<td><p align='left'><font color='#000000'><span style='font-size: 12pt'> 商貿資科 </span></font></td>")
+			'Response.Write("</tr>")
 		end if 
 	end if
 	' --------------------------- course5
 	if course5=true  then
 		if (gradeyear=1 or gradeyear=2 or gradeyear=3) and (left(classname,1)="廣" or left(classname,1)="畫") and identity<>"pro" then 
 			
-			Response.Write("<tr>")
-			Response.Write("<td>") 
-			Response.Write("<input id='Subject5' type='checkbox' name='Subject5'> 基礎圖學班(星期四)</td>")
+			'Response.Write("<tr>")
 			
-			Response.Write("<td><p align='left'><font color='#000000'><span style='font-size: 12pt'> 廣設、多媒體科學生 </span></font></td>")
-			Response.Write("</tr>")
+			'Response.Write("<td><input id='Subject5' type='checkbox' name='Subject5'> 基礎圖學班(星期四)</td>")
+			
+			'Response.Write("<td><p align='left'><font color='#000000'><span style='font-size: 12pt'> 廣設、多媒體科學生 </span></font></td>")
+			'Response.Write("</tr>")
 		end if 
 	end if	
 	' --------------------------- course6
 	if course6=true  then
 		if (gradeyear=1 or gradeyear=2 or gradeyear=3) and (left(classname,1)="廣" or left(classname,1)="畫") and identity<>"pro" then 
-			
-			Response.Write("<tr>")
-			Response.Write("<td>") 
-			'Response.Write("<td><input type='checkbox' name='Subject6' checked  onclick='pic_adv();'> 素描班(星期五)</td>")
-			Response.Write("<input id='Subject6' type='checkbox' name='Subject6' > 素描班(星期五)</td>")
-			 
-			Response.Write("<td><p align='left'><font color='#000000'><span style='font-size: 12pt'> 廣設、多媒體科學生 </span></font></td>")
-			Response.Write("</tr>")
+			'Response.Write("<tr>")
+			'Response.Write("<td><input id='Subject6' type='checkbox' name='Subject6' > 素描班(星期五)</td>")
+			'Response.Write("<td><p align='left'><font color='#000000'><span style='font-size: 12pt'> 廣設、多媒體科學生 </span></font></td>")
+			'Response.Write("</tr>")
 		end if 
 	end if
 	' --------------------------- course7
-	if course6=true then
+	if course7=true  then
 		
 	end if
 	
