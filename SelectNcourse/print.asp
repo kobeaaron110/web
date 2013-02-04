@@ -91,55 +91,43 @@ function Danger_type()
 		identity=rs("Password1")
 	end	if
 	'------- course_cnt:修課個數, total:總價錢
-	course_cnt=0
-	if course1=true then
-		course_cnt=course_cnt+1
-	end if
-	if course2=true then
-		if gradeyear=1 and left(classname,1)<>"普" then
-		else
-			course_cnt=course_cnt+1
+	'----------------------- 普通科
+	if  left(classname,1) = "普" then
+		total = 0
+		if course1=true then
+			total = total + 1200
+		end if
+		if course2=true then
+			total = total + 1200
+		end if
+		if course3=true then
+			total = total + 1800
 		end if
 	end if
-	if course3=true then
-		if gradeyear=1 and left(classname,1)<>"普" then
-		else
-			course_cnt=course_cnt+1
+	'----------------------- 職業科 高1,2 
+	if  left(classname,1) <> "普" and gradeyear <> 3 then
+		total = 0
+		if course1=true then
+			total = total + 2500
+		end if
+		if course2=true then
+			total = total + 500
+		end if
+		if course3=true then
+			total = total + 500
 		end if
 	end if
-	if course4=true then
-		course_cnt=course_cnt+1
-	end if
-	if course5=true then
-		course_cnt=course_cnt+1
-	end if
-	if course6=true then
-		course_cnt=course_cnt+1
-	end if
-	if course7=true then
-		course_cnt=course_cnt+1
-	end if
-	if identity="pro" then
-		total=course_cnt*2500
-	elseif left(classname,1)="普" and gradeyear<>3 then 
-		total=course_cnt*1200
-	elseif gradeyear=3 then
-		if course_cnt=1 then
-			total=1700
-		elseif course_cnt=2 then
-			total=3200
-		elseif course_cnt>2 then
-			total=4800
-		end if
-	elseif gradeyear=2 or gradeyear=1 then
-		if course_cnt=1 then
-			total=2500
-		elseif course_cnt=2 then
-			total=4800
-		elseif course_cnt>2 then
-			total=7000
+	'----------------------- 職業科 高3 
+	if  left(classname,1) <> "普" and gradeyear = 3 then
+		total = 0
+		if course1=true then
+			total = total + 1700
 		end if
 	end if
+	
+	'-----------------------------------
+	
+	
     if Request.Form("printsubmit")="列印" then
 		'Response.Write("列印="&Request.Form("printsubmit"))
 		Response.Redirect "print.asp"
@@ -228,8 +216,10 @@ if flag=1 then
 			else
 				Response.Write("<td><input id='Subject1' type='checkbox' name='Subject1' > 高二晚自習班(星期一 ～ 星期五)</td>")
 			end if 
-		else 'gradeyear=3 then 
-			Response.Write("<td><input id='Subject1' type='checkbox' name='Subject1' > 高三晚自習班(星期一 ～ 星期五)</td>")
+		elseif gradeyear=3 and left(classname,1) <> "普" then 
+				Response.Write("<td><input id='Subject1' type='checkbox' name='Subject1' > 高三晚自習班(星期一 ～ 星期五)</td>")			
+		elseif gradeyear=3 and left(classname,1) = "普"  then
+				Response.Write("<td><input id='Subject1' type='checkbox' name='Subject1' disabled > 您不需填寫 </td>")
 		end if 
 		
 		' Table2 欄位 : 適合參加對象 
@@ -287,9 +277,10 @@ if flag=1 then
 					Response.Write("<td><input id='Subject2' type='checkbox' name='Subject2' > 普二乙數學加強班(星期二)</td>")
 				elseif right(classname,1)="丙" then 
 					Response.Write("<td><input id='Subject2' type='checkbox' name='Subject2' > 普二丙數學加強班(星期五)</td>")			
+				end if
 				Response.Write("<td><p align='left'><font color='#000000'><span style='font-size: 12pt'> 　 </span></font></td>")
 				Response.Write("</tr>")	
-				end if 
+				 
 			elseif left(classname,1)="幼" or left(classname,1)="美" then 
 				'Response.Write("<tr>")
 				'Response.Write("<td><input id='Subject2' type='checkbox' name='Subject2' > 高二高職家事類數學 A班(星期三)</td>")
@@ -310,7 +301,6 @@ if flag=1 then
 			Response.Write("<tr>")
 			if identity="pro" then
 				Response.Write("<td><input id='Subject3' type='checkbox' name='Subject3' > 國保英文夜輔班</td>")
-				Response.Write("<td><p align='left'><font color='#000000'><span style='font-size: 12pt'> 　 </span></font></td>")
 			elseif left(classname,1)="普" then 
 				if right(classname,1)="甲" then 
 					Response.Write("<td><input id='Subject3' type='checkbox' name='Subject3' > 普一甲英文夜輔班(星期五)</td>")
@@ -318,9 +308,7 @@ if flag=1 then
 					Response.Write("<td><input id='Subject3' type='checkbox' name='Subject3' > 普一乙英文夜輔班(星期五)</td>")
 				elseif right(classname,1)="丙" then 
 					Response.Write("<td><input id='Subject3' type='checkbox' name='Subject3' > 普一丙英文夜輔班(星期五)</td>")
-				end if 
-				
-				Response.Write("<td><p align='left'><font color='#000000'><span style='font-size: 12pt'> 　 </span></font></td>")
+				end if 			
 			else
 				if course3=true then
 					if rs("ProgramID1")=999 then
@@ -335,9 +323,9 @@ if flag=1 then
 						Response.Write("<td><input id='Subject3' type='checkbox' name='Subject3'> 高一高職英文加強班(星期二)</td>")
 					end if
 				end if 
-				Response.Write("<td><p align='left'><font color='#000000'><span style='font-size: 12pt'> 　 </span></font></td>")
-				Response.Write("</tr>")
-			end if 
+			end if
+			Response.Write("<td><p align='left'><font color='#000000'><span style='font-size: 12pt'> 　 </span></font></td>")	
+			Response.Write("</tr>")
 		' --------- course3	英文 高二	
 		elseif gradeyear=2 then
 			if identity="pro" then

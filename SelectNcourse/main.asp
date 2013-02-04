@@ -33,8 +33,8 @@
 	' rs("ProgramID1")=999 代表一定要選
 	' identity="pro" 代表是國保班
 	' ---- 有名額限制
-	'from CanSelectNCourse where CourseID=1"'高一高職數學加強班	  Course2              100名
-	'from CanSelectNCourse where CourseID=2"'高一高職家事類數學A班	Course2 美容 幼保  80名
+	'from CanSelectNCourse where CourseID=1"'高一高職商業類數學 B班	  Course2              100名
+	'from CanSelectNCourse where CourseID=2"'高一高職家事類數學 A班	Course2 美容 幼保  80名
 	'from CanSelectNCourse where CourseID=3"'高一高職英文加強班	 Course3  			   120名
 	
 	Account=Session("LoginID")
@@ -128,8 +128,8 @@
 			SortValue1=rs_Course01("Credit")
 			SelectedValue1=rs_Course01("Selected")
 			' ---- 有名額限制
-			'from CanSelectNCourse where CourseID=1"'高一高職數學加強班	  Course2
-			'from CanSelectNCourse where CourseID=2"'高一高職家事類數學A班	Course2
+			'from CanSelectNCourse where CourseID=1"'高一高職商業類數學 B班	  Course2
+			'from CanSelectNCourse where CourseID=2"'高一高職家事類數學 A班	Course2
 			'from CanSelectNCourse where CourseID=3"'高一高職英文加強班	 Course3
 			' -------------------------- Course2 OR Course3 有選 且 高一年級 不是普科 是職科
 			' continue = 1 代表 要做 Update 
@@ -305,9 +305,9 @@
 	flag1=""
 	flag2=""
 	flag3=""
-	sql_Course1="Select * from CanSelectNCourse where CourseID=1"'高一高職數學加強班
+	sql_Course1="Select * from CanSelectNCourse where CourseID=1"'高一高職商業類數學 B班
 	set rs_Course1=conn.Execute(sql_Course1)
-	sql_Course2="Select * from CanSelectNCourse where CourseID=2"'高一高職家事類數學A班
+	sql_Course2="Select * from CanSelectNCourse where CourseID=2"'高一高職家事類數學 A班
 	set rs_Course2=conn.Execute(sql_Course2)
 	sql_Course3="Select * from CanSelectNCourse where CourseID=3"'高一高職英文加強班
 	set rs_Course3=conn.Execute(sql_Course3)
@@ -357,8 +357,10 @@
 			else
 				Response.Write("<td><input id='Subject1' type='checkbox' name='Subject1' > 高二晚自習班(星期一 ～ 星期五)</td>")
 			end if 
-		else 'gradeyear=3 then 
-			Response.Write("<td><input id='Subject1' type='checkbox' name='Subject1' > 高三晚自習班(星期一 ～ 星期五)</td>")
+		elseif gradeyear=3 and left(classname,1) <> "普" then 
+				Response.Write("<td><input id='Subject1' type='checkbox' name='Subject1' > 高三晚自習班(星期一 ～ 星期五)</td>")			
+		elseif gradeyear=3 and left(classname,1) = "普"  then
+				Response.Write("<td><input id='Subject1' type='checkbox' name='Subject1' disabled > 您不需填寫 </td>")
 		end if 
 		
 		' Table2 欄位 : 適合參加對象 
@@ -416,9 +418,10 @@
 					Response.Write("<td><input id='Subject2' type='checkbox' name='Subject2' > 普二乙數學加強班(星期二)</td>")
 				elseif right(classname,1)="丙" then 
 					Response.Write("<td><input id='Subject2' type='checkbox' name='Subject2' > 普二丙數學加強班(星期五)</td>")			
+				end if
 				Response.Write("<td><p align='left'><font color='#000000'><span style='font-size: 12pt'> 　 </span></font></td>")
 				Response.Write("</tr>")	
-				end if 
+				 
 			elseif left(classname,1)="幼" or left(classname,1)="美" then 
 				'Response.Write("<tr>")
 				'Response.Write("<td><input id='Subject2' type='checkbox' name='Subject2' > 高二高職家事類數學 A班(星期三)</td>")
@@ -439,7 +442,6 @@
 			Response.Write("<tr>")
 			if identity="pro" then
 				Response.Write("<td><input id='Subject3' type='checkbox' name='Subject3' > 國保英文夜輔班</td>")
-				Response.Write("<td><p align='left'><font color='#000000'><span style='font-size: 12pt'> 　 </span></font></td>")
 			elseif left(classname,1)="普" then 
 				if right(classname,1)="甲" then 
 					Response.Write("<td><input id='Subject3' type='checkbox' name='Subject3' > 普一甲英文夜輔班(星期五)</td>")
@@ -447,9 +449,7 @@
 					Response.Write("<td><input id='Subject3' type='checkbox' name='Subject3' > 普一乙英文夜輔班(星期五)</td>")
 				elseif right(classname,1)="丙" then 
 					Response.Write("<td><input id='Subject3' type='checkbox' name='Subject3' > 普一丙英文夜輔班(星期五)</td>")
-				end if 
-				
-				Response.Write("<td><p align='left'><font color='#000000'><span style='font-size: 12pt'> 　 </span></font></td>")
+				end if 			
 			else
 				if course3=true then
 					if rs("ProgramID1")=999 then
@@ -464,9 +464,9 @@
 						Response.Write("<td><input id='Subject3' type='checkbox' name='Subject3'> 高一高職英文加強班(星期二)</td>")
 					end if
 				end if 
-				Response.Write("<td><p align='left'><font color='#000000'><span style='font-size: 12pt'> 　 </span></font></td>")
-				Response.Write("</tr>")
-			end if 
+			end if
+			Response.Write("<td><p align='left'><font color='#000000'><span style='font-size: 12pt'> 　 </span></font></td>")	
+			Response.Write("</tr>")
 		' --------- course3	英文 高二	
 		elseif gradeyear=2 then
 			if identity="pro" then
@@ -535,7 +535,7 @@
 	Response.Write("</table>")
 	
 	' --------------------------- 交通 , busval : BusCode ---------------------------
-	Response.Write("<br><td> 交通選擇：（請選擇）　　　　　　　　　<a href='10002學期夜間輔導校車時間表.xls' target='_blank'>下載 夜輔校車路線站名一覽表</a></td>")
+	Response.Write("<br><td> 交通選擇：（請選擇）　　　　　　　　　<a href='10102夜間輔導校車路線表.xls' target='_blank'>下載 夜輔校車路線站名一覽表</a></td>")
 	
 	Response.Write("<table border='1' width='100%' ID='Table3'>")
 	Response.Write("<tr>")
