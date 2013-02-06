@@ -21,7 +21,7 @@ Response.Write("<tr>")
 Response.Write("<td width=100% height=27>")
 Response.Write("<p align=center><font size=4>夜輔暨晚自習</font></td>")
 Response.Write("</tr>")
-if date<#2013/2/5# then
+if date<#2014/2/21# then
 	Response.Write("<tr>")
 	Response.Write("<td width=100% height=23><font SIZE=2><a href='main.asp' target='mainFrame'> 選擇夜輔暨晚自習參加科目 </a></font></td>")
 	Response.Write("</tr>")
