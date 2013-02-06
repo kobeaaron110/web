@@ -10,7 +10,7 @@ if request("logout")="yes" then
 	Session("botanizedID")=0
 end if
 
-sql="Select * From condition Where ConditionID=1"
+sql="Select * From condition Where ConditionID=3"
 set rs = conn.Execute(sql)
 startday=rs("StartDate")
 endday=rs("EndDate")
@@ -18,8 +18,7 @@ endday=rs("EndDate")
 if len(Request.Form("cmd1"))>0 then              
     muserid=Trim(Request.Form("id"))
     mpasswd=Request.Form("password")
-	'//-- aaron Not
-	if endday<now or startday>now then 'and muserid<>"P101825460"
+    if endday<now or startday>now then 'and muserid<>"P101825460"
 %>
 	<script language="JavaScript">
 		alert("\n不在時間期限內，\n您已無權限進入！");
@@ -53,17 +52,15 @@ if len(Request.Form("cmd1"))>0 then
 			else
 				sql_class="Select * from PermRec INNER JOIN Class on PermRec.ClassID=Class.ClassID where SNum='" & muserid & "'"
 				set rs_class=conn.Execute(sql_class)
-			    
-				if rs("Active")=0 then
+			    if rs("Active")=0 then
 %>
 	<script language="JavaScript">
 		alert("\n您已無權限進入！");
 		history.go( -1 )
 	</script>
 <%
-					flag=0
-				'2013-01-23 aaron 		
-			    elseif left(rs_class("ClassName"),1)="略過" then 'rs_class("ClassName")="普三甲" or rs_class("ClassName")="普三乙" then 
+					flag=0              
+			    elseif rs_class("ClassYear")=3 and left(rs_class("ClassName"),1)="普" then 'rs_class("ClassName")="普三甲" or rs_class("ClassName")="普三乙" then
 %>
 	<script language="JavaScript">
 		alert("\n您無須填寫！");
@@ -75,7 +72,6 @@ if len(Request.Form("cmd1"))>0 then
 					Session("LoginID") = rs("LoginName")
 					Session("Password") = mpasswd
 					Session("LogonLevel") = rs("RefType")
-					
 					LoginTimes = rs("LoginTimes")+1
 					sql1="Update Login Set LoginDate='" & date & " " & Hour(time( )) & right(time( ),6) & "'"
 					sql1=sql1+",LoginIP='" & Request.ServerVariables("REMOTE_HOST") & "',LoginTimes=" & LoginTimes & " Where LoginName='"+muserid+"'"
@@ -100,9 +96,9 @@ end if
 <script language="Javascript"> 
 function checkvalue() {
 	var tmp	= login.id.value.toLowerCase(); 
-	if(tmp.length < 6 ){
+	if(tmp.length < 6 ){ 
 	alert("請輸入6碼的帳號 (學號)!"); 
-	return false;
+	return false; 
 	} 
 	for(p = 0 ; p < 2 ; p++){ 
 	tmp2 = tmp.substring(p,p+1); 
@@ -134,7 +130,7 @@ function numcheck(id, time) {
 	// 不含 數字
 	//var re = /^[0-9]+$/;
 	// 不含 數字 與 A
-	var re = /^[A0-9]+$/;
+	var re = /^[Aa0-9]+$/;
     if (!re.test(time.value)){
 		document.getElementById(id).value = time.value.substring(0, time.value.length - 1);
 	}
@@ -147,7 +143,7 @@ function numcheck(id, time) {
 <body onload="document.login.id.focus()">
 <h2 align="center">
   <font face="標楷體" size=5>台中市明德女中夜輔暨晚自習選擇登入帳號<br></font>
-	<%if date<#2012/09/05# then%>
+	<%if date<#2013/02/21# then%>
 		<font face="標楷體" color=blue size=4>本次填寫之時間期限自 <%=startday%> 至 <%=endday%><br></font>
 	<%else%>
 		<font face="標楷體" color=blue size=4>本次列印之時間期限 至 <%=endday%><br></font>
@@ -168,7 +164,7 @@ function numcheck(id, time) {
           </tr>
           <tr>
             <td width="45%" align="right" height="60"></td>
-            <td width="50%" height="60"><input type="submit" value="確定" name="cmd1" onclick="checkvalue()"> 
+            <td width="50%" height="60"><input type="submit" value="確定" name="cmd1" onclick="return checkvalue()"> 
               <input type="reset" value="重新輸入" name="B2"></td>
           </tr>
         </table>
