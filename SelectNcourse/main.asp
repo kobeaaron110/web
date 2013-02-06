@@ -386,13 +386,13 @@
 					Response.Write("<td><input id='Subject2' type='checkbox' name='Subject2'> 普一丙數學加強班(星期四)</td>")
 				end if 
 			elseif left(classname,1)="幼" or left(classname,1)="美" then
-				if rs("ProgramID2")=999 or flag2="額滿" then
+				if  flag2="額滿" and course2=false then
 					Response.Write("<td><input id='Subject2' type='checkbox' name='Subject2' disabled> 高一高職家事類數學 A班(星期一)</td>")
 				else
 					Response.Write("<td><input id='Subject2' type='checkbox' name='Subject2'> 高一高職家事類數學 A班(星期一)</td>")
 				end if
 			else
-				if rs("ProgramID1")=999 or flag1="額滿" then
+				if  flag1="額滿" and course2=false then
 					Response.Write("<td><input id='Subject2' type='checkbox' name='Subject2' disabled> 高一高職商業類數學 B班(星期一)</td>")
 				else
 					Response.Write("<td><input id='Subject2' type='checkbox' name='Subject2'> 高一高職商業類數學 B班(星期一)</td>")
@@ -451,19 +451,11 @@
 					Response.Write("<td><input id='Subject3' type='checkbox' name='Subject3' > 普一丙英文夜輔班(星期五)</td>")
 				end if 			
 			else
-				if course3=true then
-					if rs("ProgramID1")=999 then
-						Response.Write("<td><input id='Subject3' type='checkbox' name='Subject3'  disabled> 高一高職英文加強班(星期二)</td>")
-					else
-						Response.Write("<td><input id='Subject3' type='checkbox' name='Subject3' > 高一高職英文加強班(星期二)</td>")
-					end if
+				if flag3="額滿" and course3 = false then
+					Response.Write("<td><input id='Subject3' type='checkbox' name='Subject3' disabled> 高一高職英文加強班(星期二)　　<strong>《" & flag3 & "》</strong></td>")
 				else
-					if flag3="額滿" then
-						Response.Write("<td><input id='Subject3' type='checkbox' name='Subject3' disabled> 高一高職英文加強班(星期二)　　<strong>《" & flag3 & "》</strong></td>")
-					else
-						Response.Write("<td><input id='Subject3' type='checkbox' name='Subject3'> 高一高職英文加強班(星期二)</td>")
-					end if
-				end if 
+					Response.Write("<td><input id='Subject3' type='checkbox' name='Subject3'> 高一高職英文加強班(星期二)</td>")
+				end if
 			end if
 			Response.Write("<td><p align='left'><font color='#000000'><span style='font-size: 12pt'> 　 </span></font></td>")	
 			Response.Write("</tr>")
