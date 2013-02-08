@@ -10,7 +10,7 @@ if request("logout")="yes" then
 	Session("botanizedID")=0
 end if
 
-sql="Select * From condition Where ConditionID=3"
+sql="Select * From condition Where ConditionID=1"
 set rs = conn.Execute(sql)
 startday=rs("StartDate")
 endday=rs("EndDate")
