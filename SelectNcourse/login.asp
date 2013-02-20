@@ -143,7 +143,7 @@ function numcheck(id, time) {
 <body onload="document.login.id.focus()">
 <h2 align="center">
   <font face="標楷體" size=5>台中市明德女中夜輔暨晚自習選擇登入帳號<br></font>
-	<%if date<#2013/02/21# then%>
+	<%if date<#2013/02/22# then%>
 		<font face="標楷體" color=blue size=4>本次填寫之時間期限自 <%=startday%> 至 <%=endday%><br></font>
 	<%else%>
 		<font face="標楷體" color=blue size=4>本次列印之時間期限 至 <%=endday%><br></font>
