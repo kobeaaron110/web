@@ -165,11 +165,14 @@
 						end if
 					end if
 				end if
-				if Subject1=1 or Subject4=1 or Subject5=1 or Subject6=1 then
+				if Subject1=1 or Subject4=1 or Subject5=1 or Subject6=1 or Subject7=1 then
 					continue=1
 				end if
 			else
 				continue=1
+			end if
+			if Subject1=0 and Subject2=0 and Subject3=0 and Subject4=0 and Subject5=0 and Subject6=0 and Subject7=0 then
+				continue=0
 			end if
 			' ------------------------------------------------- 站名資料
 			if Bus>0 then
