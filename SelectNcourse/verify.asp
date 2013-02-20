@@ -2,7 +2,7 @@
    ' Response.Redirect "cexam.asp"
 	if Session("LogonLevel")="ST" Then
 		'if date<=#2012/09/05# then
-		if date<=#2013/09/15# then
+		if date<=#2013/02/22# then
 			Response.Redirect "index.asp"
 		else
 			Response.Redirect "index_print.asp"

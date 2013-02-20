@@ -133,6 +133,7 @@
 			'from CanSelectNCourse where CourseID=3"'高一高職英文加強班	 Course3
 			' -------------------------- Course2 OR Course3 有選 且 高一年級 不是普科 是職科
 			' continue = 1 代表 要做 Update 
+			continue=1
 			if (Subject2=1 or Subject3=1) and gradeyear=1 and left(classname,1)<>"普" then
 				continue=0
 				update1=0
@@ -141,8 +142,7 @@
 				if Subject3=1 then
 					if rs_Course03("Selected")>=rs_Course03("StuLimit") then
 						' 已額滿
-						Response.Write("<td><p align='center'><span style='font-size: 18pt; color:#FF0000; font-family: 標楷體'><strong>『英文加強班』已額滿，請重新選擇後再繼續！</strong></span><br><br></td>")
-						continue=0
+						Response.Write("<td><p align='center'><span style='font-size: 18pt; color:#FF0000; font-family: 標楷體'><strong>『英文加強班』已額滿，請重新選擇後再繼續！</strong></span><br><br></td>")						
 					else
 						continue=1
 						update3=1
@@ -151,23 +151,21 @@
 				if Subject2=1 then
 					if left(classname,1)="幼" or left(classname,1)="美" then
 						if rs_Course02("Selected")>=rs_Course02("StuLimit") then
-							Response.Write("<td><p align='center'><span style='font-size: 18pt; color:#FF0000; font-family: 標楷體'><strong>『家事類數學A班』已額滿，請重新選擇後再繼續！</strong></span><br><br></td>")
-							continue=0
+							Response.Write("<td><p align='center'><span style='font-size: 18pt; color:#FF0000; font-family: 標楷體'><strong>『家事類數學A班』已額滿，請重新選擇後再繼續！</strong></span><br><br></td>")							
 						else
 							continue=1
 							update2=1
 						end if
 					else
 						if rs_Course01("Selected")>=rs_Course01("StuLimit") then
-							Response.Write("<td><p align='center'><span style='font-size: 18pt; color:#FF0000; font-family: 標楷體'><strong>『商業類數學B班』已額滿，請重新選擇後再繼續！</strong></span><br><br></td>")
-							continue=0
+							Response.Write("<td><p align='center'><span style='font-size: 18pt; color:#FF0000; font-family: 標楷體'><strong>『商業類數學B班』已額滿，請重新選擇後再繼續！</strong></span><br><br></td>")					
 						else
 							continue=1
 							update1=1
 						end if
 					end if
 				end if
-				if Subject1=1 or Subject5=1 or Subject6=1 then
+				if Subject1=1 or Subject4=1 or Subject5=1 or Subject6=1 then
 					continue=1
 				end if
 			else
